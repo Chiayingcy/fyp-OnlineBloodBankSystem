@@ -1,8 +1,9 @@
+<title>Donor Login</title>
 <x-guest-layout>
     <x-auth-card>
         <x-slot name="logo">
             <a href="/">
-                <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
+                 <img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
         </x-slot>
 
@@ -20,6 +21,13 @@
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
+            </div>
+
+            <!-- Identification Number -->
+            <div class="mt-4">
+                <x-input-label for="ic" :value="__('Identifiaction Number (I.C. No.)')" />
+
+                <x-text-input id="ic" class="block mt-1 w-full" type="text" name="ic" :value="old('ic')" required autofocus />
             </div>
 
             <!-- Password -->
@@ -46,11 +54,19 @@
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
+            </div>
+
+            <div class="flex items-center justify-end mt-4">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                    {{ __('Dont have account? Register Here!') }}
+                </a>
 
                 <x-primary-button class="ml-3">
                     {{ __('Log in') }}
                 </x-primary-button>
             </div>
         </form>
+        
     </x-auth-card>
 </x-guest-layout>
+

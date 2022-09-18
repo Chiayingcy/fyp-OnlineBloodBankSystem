@@ -1,6 +1,9 @@
 <?php
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
+use App\Http\Controllers\Hospitals\Auth\AuthenticatedSessionController as HosptialsAuth;
+use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuth;
+
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
@@ -53,4 +56,32 @@ Route::middleware('auth')->group(function () {
 
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
+});
+
+
+# Hospitals panel routes
+Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
+
+    Route::get('/login', [HosptialsAuth::class, 'create'])->name('login');
+    Route::post('/login', [HosptialsAuth::class, 'store']);
+
+    Route::get('/logout', [HosptialsAuth::class, 'destroy'])->name('logout');
+
+    Route::get('/dashboard', function (){
+        return 'Hospitals';
+    });
+});
+
+
+# Admin panel routes
+Route::prefix('/Admin')->name('Admin.')->group(function (){
+
+    Route::get('/login', [AdminAuth::class, 'create'])->name('login');
+    Route::post('/login', [AdminAuth::class, 'store']);
+
+    Route::get('/logout', [AdminAuth::class, 'destroy'])->name('logout');
+
+    Route::get('/dashboard', function (){
+        return 'Admin';
+    });
 });
