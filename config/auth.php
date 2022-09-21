@@ -46,15 +46,16 @@ return [
             'provider' => 'users',
         ],
 
+        'Hospitals' => [
+            'driver' => 'session',
+            'provider' => 'Hospitals',
+        ],
+        
         'Admin' => [
             'driver' => 'session',
             'provider' => 'Admin',
         ],
         
-        'Hospitals' => [
-            'driver' => 'session',
-            'provider' => 'Hospitals',
-        ],
 
     ],
 

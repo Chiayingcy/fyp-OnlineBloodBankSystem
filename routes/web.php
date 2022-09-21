@@ -22,3 +22,15 @@ Route::get('/dashboard', function () {
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('Donor/auth/login', function () {
+    return view('Donor/auth/login');
+});
+
+Route::get('Donor/auth/t&c', function () {
+    return view('Donor/auth/t&c');
+});
+
+Route::post('Donor/auth/t&c', function () {
+    return view('Donor/auth/t&c');
+});

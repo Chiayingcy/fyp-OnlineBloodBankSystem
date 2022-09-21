@@ -4,12 +4,16 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Hospitals\Auth\AuthenticatedSessionController as HosptialsAuth;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController as AdminAuth;
 
+use App\Http\Controllers\Auth\TermsAndConditionsController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
 use App\Http\Controllers\Auth\PasswordResetLinkController;
+
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Hospitals\Auth\RegisteredHospitalsController;
+
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,6 +27,9 @@ Route::middleware('guest')->group(function () {
                 ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('Donor/auth/t&c', [TermsAndConditionsController::class, 'index'])
+                ->name('t&c');
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -64,6 +71,11 @@ Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
 
     Route::get('/login', [HosptialsAuth::class, 'create'])->name('login');
     Route::post('/login', [HosptialsAuth::class, 'store']);
+
+    Route::get('/register', [RegisteredHospitalsController::class, 'create'])
+                ->name('register');
+
+    Route::post('/register', [RegisteredHospitalsController::class, 'store']);
 
     Route::get('/logout', [HosptialsAuth::class, 'destroy'])->name('logout');
 

@@ -7,7 +7,7 @@
     <div class = "card">
         <div class = "card-body">
         <x-slot name="logo">
-        <h3>Donor Registration</h3>
+        <h3 class ="text-center">Donor Registration</h3>
             <a href="/">
                 <br/><img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
@@ -87,22 +87,16 @@
                 <select id="gender" class="block mt-1 w-full" name="gender" required>
                 <option selected>Select Gender</option>
 
-                <option value="male" name="gender" id="1">
+                <option value="m" name="gender" id="1">
                     Male
                 </option>
 
-                <option value="female" name="gender"  id="2">
+                <option value="f" name="gender"  id="2">
                     Female
                 </option>
                 </select>
 
                 
-            </div>
-
-             <!-- Age -->
-             <div class="mt-4">
-                <x-input-label for="age" :value="__('Age')" />
-                <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" required />
             </div>
 
             <!-- Contact Number -->
@@ -161,7 +155,7 @@
         <div class="mt-4">
             <div class="form-check">
                 <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                <a href="{{ __('/Donor/auth/t&c') }}"><label class="form-check-label" for="invalidCheck3 ">
+                <a href="{{ route('Donor/auth/login') }}"><label class="form-check-label" for="invalidCheck3 ">
                     Agree to terms and conditions
                 </label></a>
 

@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('hospitalID')->unique();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->integer('phoneNo');
+            $table->string('phoneNo');
             $table->string('address');
             $table->integer('zipCode');
             $table->string('state');

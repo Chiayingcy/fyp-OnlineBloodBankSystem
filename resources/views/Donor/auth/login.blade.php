@@ -1,13 +1,10 @@
 <title>Donor Login</title>
 <x-guest-layout>
-<section class="bg-image" style="background-image: url('/Images/background1.png');">
-   
-<div class ="col-4 justify-content-center ">
     <x-auth-card>
         <x-slot name="logo">
         <h3 class = "text-center">Donor Login</h3>
             <a href="/">
-                 <img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
+                <img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
         </x-slot>
 
@@ -17,15 +14,15 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('Donor.login') }}">
             @csrf
 
-           <!-- Email Address
+            <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div> -->
+            </div>
 
             <!-- Identification Number -->
             <div class="mt-4">
@@ -61,7 +58,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('Donor.auth.register') }}">
                     {{ __('Dont have account? Register Here!') }}
                 </a>
 
@@ -72,7 +69,5 @@
         </form>
         
     </x-auth-card>
-</div>
-</section>
 </x-guest-layout>
 

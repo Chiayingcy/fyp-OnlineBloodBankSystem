@@ -25,6 +25,7 @@ class UserSeeder extends Seeder
             'email'     => 'donor@gmail.com',
             'bloodType' => 'O+',
             'gender'    => 'female',
+            'age'       => '21',
             'phoneNo'   => '0123452654',
             'address'   => '123, Jalan Timun, Taman ABC',
             'zipCode'   => '11500',

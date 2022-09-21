@@ -1,11 +1,11 @@
-<title>Donor Login</title>
+<title>Hospital Login</title>
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
    
 <div class ="col-4 justify-content-center ">
     <x-auth-card>
         <x-slot name="logo">
-        <h3 class = "text-center">Donor Login</h3>
+            <h3 class = "text-center">Hospital Login</h3>
             <a href="/">
                  <img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
@@ -17,21 +17,14 @@
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('login') }}">
+        <form method="POST" action="{{ route('Hospitals.login') }}">
             @csrf
 
-           <!-- Email Address
-            <div>
-                <x-input-label for="email" :value="__('Email')" />
-
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div> -->
-
-            <!-- Identification Number -->
+            <!-- Hospital ID -->
             <div class="mt-4">
-                <x-input-label for="ic" :value="__('Identifiaction Number (I.C. No.)')" />
+                <x-input-label for="hospitalID" :value="__('Hospital ID')" />
 
-                <x-text-input id="ic" class="block mt-1 w-full" type="text" name="ic" :value="old('ic')" required autofocus />
+                <x-text-input id="hospitalID" class="block mt-1 w-full" type="text" name="hospitalID" :value="old('hospitalID')" required autofocus />
             </div>
 
             <!-- Password -->
@@ -61,7 +54,7 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('register') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('Hospitals.register') }}">
                     {{ __('Dont have account? Register Here!') }}
                 </a>
 

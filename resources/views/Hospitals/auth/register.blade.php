@@ -1,4 +1,4 @@
-<title>Donor Registration</title>
+<title>Hospitals Registration</title>
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
 
@@ -7,30 +7,30 @@
     <div class = "card">
         <div class = "card-body">
         <x-slot name="logo">
-        <h3>Donor Registration</h3>
+        <h3>Hospitals Registration</h3>
             <a href="/">
                 <br/><img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
         </x-slot>
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+       <!-- Validation Errors -->
+       <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-        <form method="POST" action="{{ route('register') }}">
+        <form method="POST" action="{{ route('Hospitals.register') }}">
             @csrf
 
-            <!-- Name -->
+            <!-- Hospital Name -->
             <div>
-                <x-input-label for="name" :value="__('Name')" />
+                <x-input-label for="hospitalName" :value="__('Hospital Name')" />
 
-                <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus />
+                <x-text-input id="hospitalName" class="block mt-1 w-full" type="text" name="hospitalName" :value="old('hospitalName')" required autofocus />
             </div>
 
-            <!-- Identifiaction Number -->
+            <!-- Hospital ID -->
             <div class="mt-4">
-                <x-input-label for="ic" :value="__('Identification Number')" />
+                <x-input-label for="hospitalID" :value="__('Hospital ID')" />
 
-                <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" :value="old('ic')" required />
+                <x-text-input id="hospitalID" class="block mt-1 w-full" type="text" name="hospitalID" :value="old('hospitalID')" required />
             </div>
 
             <!-- Email Address -->
@@ -38,71 +38,6 @@
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
-            </div>
-
-            <!-- Blood Type -->
-            <div class="mt-4">
-                <x-input-label for="bloodType" :value="__('Blood Type')" />
-                <select id="bloodType" class="block mt-1 w-full" name="bloodType" required>
-                <option selected>Select Blood Type</option>
-                
-                <option value="A+" name="bloodType">
-                    A+
-                </option>
-
-                <option value="A-" name="bloodType">
-                    A-
-                </option>
-
-                <option value="B+" name="bloodType">
-                    B+
-                </option>
-
-                <option value="B-" name="bloodType">
-                    B-
-                </option>
-
-                <option value="AB+" name="bloodType">
-                    AB+
-                </option>
-
-                <option value="AB-" name="bloodType">
-                    AB-
-                </option>
-
-                <option value="O+" name="bloodType">
-                    O+
-                </option>
-
-                <option value="O-" name="bloodType">
-                    O-
-                </option>
-
-            </select>
-            </div>
-
-            <!-- Gender -->
-            <div class="mt-4">
-                <x-input-label for="gender" :value="__('Gender')" />
-                <select id="gender" class="block mt-1 w-full" name="gender" required>
-                <option selected>Select Gender</option>
-
-                <option value="male" name="gender" id="1">
-                    Male
-                </option>
-
-                <option value="female" name="gender"  id="2">
-                    Female
-                </option>
-                </select>
-
-                
-            </div>
-
-             <!-- Age -->
-             <div class="mt-4">
-                <x-input-label for="age" :value="__('Age')" />
-                <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" required />
             </div>
 
             <!-- Contact Number -->
@@ -158,22 +93,8 @@
                                 type="password"
                                 name="password_confirmation" required />
 
-        <div class="mt-4">
-            <div class="form-check">
-                <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                <a href="{{ __('/Donor/auth/t&c') }}"><label class="form-check-label" for="invalidCheck3 ">
-                    Agree to terms and conditions
-                </label></a>
-
-                <span class="text-danger">@error("invalidCheck3"){{$message}}@enderror</span>
-                <div class="invalid-feedback">
-                    You must agree before submitting.
-                </div>
-            </div>
-        </div>
-
             <div class="justify-end mt-4">
-                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('login') }}">
+                <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('Hospitals.login') }}">
                     {{ __('Already registered? Login Here!') }}
                 </a>
 
@@ -182,11 +103,11 @@
                 </x-primary-button>
             </div>
         </form>
-        </div>
+    </div>
     </div></div>    
     </x-auth-card>
 
     <br/><br/>
-</div>
+    </div>
 
 </x-guest-layout>
