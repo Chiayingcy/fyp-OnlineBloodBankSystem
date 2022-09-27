@@ -30,7 +30,13 @@
             <div class="mt-4">
                 <x-input-label for="ic" :value="__('Identification Number')" />
 
-                <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" :value="old('ic')" required />
+                <x-text-input id="ic" class="block mt-1 w-full" type="text" name="ic" placeholder="I.C. Format: 010101-01-0101" :value="old('ic')" required />
+            </div>
+            
+             <!-- Age -->
+             <div class="mt-4">
+                <x-input-label for="age" :value="__('Age')" />
+                <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" min="18" max="65" :value="old('age')" required />
             </div>
 
             <!-- Email Address -->
@@ -99,16 +105,10 @@
                 
             </div>
 
-             <!-- Age -->
-             <div class="mt-4">
-                <x-input-label for="age" :value="__('Age')" />
-                <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" :value="old('age')" required />
-            </div>
-
             <!-- Contact Number -->
             <div class="mt-4">
                 <x-input-label for="phoneNo" :value="__('Contact Number')" />
-                <x-text-input id="phoneNo" class="block mt-1 w-full" type="tel" name="phoneNo" :value="old('phoneNo')" required />
+                <x-text-input id="phoneNo" class="block mt-1 w-full" type="tel" name="phoneNo" placeholder="Example: 0123456789 without any symbol" :value="old('phoneNo')" required />
             </div>
 
             <!-- Address -->
@@ -120,13 +120,47 @@
             <!-- Zip Code -->
             <div class="mt-4">
                 <x-input-label for="zipCode" :value="__('Zip Code')" />
-                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" :value="old('zipCode')" required />
+                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" min="10000" max="20000" :value="old('zipCode')" required />
             </div>
 
-            <!-- State -->
+            <!-- State
             <div class="mt-4">
                 <x-input-label for="state" :value="__('State')" />
                 <x-text-input id="state" class="block mt-1 w-full" type="text" name="state" :value="old('state')" required />
+            </div>-->
+
+            <!-- State -->
+            <div class="mt-4">
+            <x-input-label for="stateID" :value="__('State')" />
+                <select id="stateID" class="block mt-1 w-full" name="stateID" required>
+                <option selected>Select Your State</option>
+                    @foreach($States as $state)
+                        <option value="{{ $state->stateID }}" class="text-dark">{{ $state->stateName }}</option>
+
+                    @endforeach
+
+                </select>
+            </div>
+
+            <!-- Role -->
+            <div class="mt-4">
+                <x-input-label for="role" :value="__('Role')" />
+                <select id="role" class="block mt-1 w-full" name="role" required>
+                <option selected>Select Your Role</option>
+
+                <option value="1" name="role" id="donor">
+                    Donor
+                </option>
+
+                <option value="2" name="role"  id="hospital">
+                    Hospital
+                </option>
+
+                <option value="3" name="role"  id="admin">
+                    Admin
+                </option>
+
+                </select>
             </div>
 
             <!-- Password -->
@@ -161,7 +195,7 @@
         <div class="mt-4">
             <div class="form-check">
                 <input class="form-check-input is-invalid" type="checkbox" value="" id="invalidCheck3" required>
-                <a href="{{ __('/Donor/auth/t&c') }}"><label class="form-check-label" for="invalidCheck3 ">
+                <a href="{{ __('/auth/t&c') }}"><label class="form-check-label" for="invalidCheck3 ">
                     Agree to terms and conditions
                 </label></a>
 

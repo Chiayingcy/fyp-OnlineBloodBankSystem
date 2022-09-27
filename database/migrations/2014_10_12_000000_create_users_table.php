@@ -13,24 +13,41 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::enableForeignKeyConstraints();
         Schema::create('users', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->integer('userType')->default(0);
-            $table->string('ic')->unique();
+            $table->string('name', 100);
+            $table->string('ic', 14)->unique();
+            $table->integer('age');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
-            $table->string('bloodType');
-            $table->string('gender');
-            $table->integer('age');
-            $table->integer('phoneNo');
+            $table->string('bloodType', 3);
+            $table->string('gender', 6);
+            $table->string('phoneNo', 11);
             $table->string('address');
-            $table->string('zipCode');
-            $table->string('state');
+            $table->string('zipCode', 5);
+
+            // This simply creates an unsigned string column
+           // $table->string('stateCode', 5);
+
+            // This ensures that the state_code must be a valid / existing one
+            $table->unsignedBigInteger('stateID');
+           // $table->foreign('stateID')->references('stateID')->on('states')->onUpdate('cascade')->onDelete('cascade');
+          // $table->foreignId('stateID')->constrained('states');
+
+
+            $table->integer('role');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
+
+
+     //   Schema::table('users', function(Blueprint $table) {
+            // This ensures that the state_code must be a valid / existing one
+       //     $table->foreign('stateCode')->references('stateCode')->on('states');
+       // });
+     
     }
 
     /**

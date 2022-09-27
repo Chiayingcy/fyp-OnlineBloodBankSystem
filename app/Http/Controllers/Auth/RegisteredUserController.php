@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\State;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -20,7 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
-        return view('auth.register');
+        $States = State::all();
+
+        return view('auth.register', compact('States'));
     }
 
     /**
@@ -47,15 +50,16 @@ class RegisteredUserController extends Controller
 
         $request->validate([
             'name' => 'required|min:0|max:255|',
-            'ic' => 'required|min:0|max:12|unique:users',
+            'ic' => 'required|min:0|max:14|unique:users',
+            'age' => 'required|min:2|max:5|',
             'email' => 'required|email|unique:users',
             'bloodType' => 'required',
             'gender' => 'required|min:4|max:255|',
-            'age' => 'required|min:2|max:3|',
-            'phoneNo' => 'required|numeric|min:0|max:11|',
+            'phoneNo' => 'required|numeric|min:10|',
             'address' => 'required|min:5|max:255|',
             'zipCode' => 'required|min:0|max:5|',
-            'state' => 'required|min:5|max:20|',
+            'stateID' => 'required|',
+            'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()
                         ],
@@ -68,14 +72,15 @@ class RegisteredUserController extends Controller
         $user = User::create([
             'name' => $request->name,
             'ic' => $request->ic,
+            'age' => $request->age,
             'email' => $request->email,
             'bloodType' => $request->bloodType,
             'gender' => $request->gender,
-            'age' => $request->age,
             'phoneNo' => $request->phoneNo,
             'address' => $request->address,
             'zipCode' => $request->zipCode,
-            'state' => $request->state,
+            'stateID' => $request->stateID,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

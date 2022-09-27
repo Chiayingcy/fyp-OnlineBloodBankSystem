@@ -21,15 +21,18 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'      => 'Donor',
-            'ic'        => '010101-07-0123',   
+            'ic'        => '010101-07-0123',
+            'age'       => '21',   
             'email'     => 'donor@gmail.com',
             'bloodType' => 'O+',
             'gender'    => 'female',
-            'age'       => '21',
             'phoneNo'   => '0123452654',
             'address'   => '123, Jalan Timun, Taman ABC',
             'zipCode'   => '11500',
-            'state'     => 'Penang',
+           // 'state' => 'Penang',
+            //'stateCode' => 'MY-07',
+            'stateID'   => '7',
+            'role'      => '1',
             'password'  => Hash::make('@Abcd1234'),
         ]);
 

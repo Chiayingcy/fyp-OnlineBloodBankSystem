@@ -26,6 +26,7 @@ class DatabaseSeeder extends Seeder
             UserSeeder::class,
             HospitalsSeeder::class,
             AdminSeeder::class,
+            StateSeeder::class,
         ]);
 
    //     \App\Models\User::factory()->create([

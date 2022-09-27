@@ -67,6 +67,6 @@ class RegisteredHospitalsController extends Controller
 
         Auth::login($hospitals);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOSPITALS_HOME);
     }
 }

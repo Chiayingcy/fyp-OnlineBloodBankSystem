@@ -14,7 +14,7 @@ class TermsAndConditionsController extends Controller
      */
     public function index()
     {
-        return view('Donor/auth/t&c');
+        return view('auth/t&c');
     }
 
 }

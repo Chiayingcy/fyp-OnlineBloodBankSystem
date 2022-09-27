@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 class AuthenticatedSessionController extends Controller
 {
     /**
-     * Display the login view.
+     * Display the hospitals login view.
      *
      * @return \Illuminate\View\View
      */
@@ -23,7 +23,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
+     * @param  \App\Http\Requests\Auth\HospitalsLoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(HospitalsLoginRequest $request)

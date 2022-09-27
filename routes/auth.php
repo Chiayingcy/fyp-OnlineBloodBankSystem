@@ -13,6 +13,7 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Hospitals\Auth\RegisteredHospitalsController;
+use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
@@ -69,8 +70,8 @@ Route::middleware('auth')->group(function () {
 # Hospitals panel routes
 Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
 
-    Route::get('/login', [HosptialsAuth::class, 'create'])->name('login');
-    Route::post('/login', [HosptialsAuth::class, 'store']);
+    Route::get('/login', [HosptialsAuth::class, 'create'])->middleware('guest:Hospitals')->name('login');
+    Route::post('/login', [HosptialsAuth::class, 'store'])->middleware('guest:Hospitals');
 
     Route::get('/register', [RegisteredHospitalsController::class, 'create'])
                 ->name('register');
@@ -81,19 +82,24 @@ Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
 
     Route::get('/dashboard', function (){
         return 'Hospitals';
-    });
+    })->middleware('Hospitals');
 });
 
 
 # Admin panel routes
 Route::prefix('/Admin')->name('Admin.')->group(function (){
 
-    Route::get('/login', [AdminAuth::class, 'create'])->name('login');
-    Route::post('/login', [AdminAuth::class, 'store']);
+    Route::get('/login', [AdminAuth::class, 'create'])->middleware('guest:Admin')->name('login');
+    Route::post('/login', [AdminAuth::class, 'store'])->middleware('guest:Admin');
+
+    Route::get('/register', [RegisteredAdminController::class, 'create'])
+                ->name('register');
+
+    Route::post('/register', [RegisteredAdminController::class, 'store']);
 
     Route::get('/logout', [AdminAuth::class, 'destroy'])->name('logout');
 
     Route::get('/dashboard', function (){
         return 'Admin';
-    });
+    })->middleware('Admin');
 });
