@@ -1,4 +1,18 @@
 <title>Hospital Login</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- CSS for toggle eye icon -->
+<style>
+    .fa-eye{
+  position: absolute;
+  top: 58.2%;
+  right: 20%;
+  cursor: pointer;
+  color: lightgray;
+}
+</style>
+
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
    
@@ -20,11 +34,18 @@
         <form method="POST" action="{{ route('Hospitals.login') }}">
             @csrf
 
-            <!-- Hospital ID -->
+            <!-- Hospital ID 
             <div class="mt-4">
                 <x-input-label for="hospitalID" :value="__('Hospital ID')" />
 
                 <x-text-input id="hospitalID" class="block mt-1 w-full" type="text" name="hospitalID" :value="old('hospitalID')" required autofocus />
+            </div>-->
+
+            <!-- Email Address -->
+            <div class="mt-4">
+                <x-input-label for="email" :value="__('Email')" />
+
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
             <!-- Password -->
@@ -35,6 +56,8 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
+                    
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
             </div>
 
             <!-- Remember Me -->
@@ -46,8 +69,8 @@
             </div>
 
             <div class="flex items-center justify-end mt-4">
-                @if (Route::has('password.request'))
-                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('password.request') }}">
+                @if (Route::has('Hospitals.auth.password.request'))
+                    <a class="underline text-sm text-gray-600 hover:text-gray-900" href="{{ route('Hospitals.auth.password.request') }}">
                         {{ __('Forgot your password?') }}
                     </a>
                 @endif
@@ -69,3 +92,17 @@
 </section>
 </x-guest-layout>
 
+<!-- Password Visibility -->
+<script> 
+    const passwordField = document.querySelector("#password");
+    const eyeIcon= document.querySelector("#eye");
+
+    eye.addEventListener("click", function(){
+    // toggle the eye slash icon
+    this.classList.toggle("fa-eye-slash");
+
+    // toggle the type attribute
+    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+    passwordField.setAttribute("type", type);
+    })
+</script>

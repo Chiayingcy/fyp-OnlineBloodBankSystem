@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Notifications\HospitalsResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -21,12 +23,14 @@ class Hospitals extends Authenticatable
      */
     protected $fillable = [
         'hospitalName',
-        'hospitalID',
+       // 'hospitalID',
         'email',
+        'hospitalLink',
         'phoneNo',
         'address',
         'zipCode',
-        'state',
+        'stateID',
+        'role',
         'password',
     ];
 
@@ -48,4 +52,15 @@ class Hospitals extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Send the password reset notification.
+     *
+     * @param  string  $token
+     * @return void
+     */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new HospitalsResetPasswordNotification($token));
+    }
 }

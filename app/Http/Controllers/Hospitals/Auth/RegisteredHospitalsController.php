@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 use App\Models\Hospitals;
+use App\Models\State;
+
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Support\Facades\Auth;
@@ -21,7 +23,17 @@ class RegisteredHospitalsController extends Controller
      */
     public function create()
     {
-        return view('Hospitals.auth.register');
+
+        $States = State::all();
+        return view('Hospitals.auth.register', compact('States'));
+    }
+
+    /* This is to print all the hospitals from hospital table in database in Hospital List view for donor*/
+    public function viewHospitals()
+    {
+
+        $Hospitals = Hospitals::all();
+        return view('auth.hospitals_list', compact('Hospitals'));
     }
 
     /**
@@ -37,12 +49,14 @@ class RegisteredHospitalsController extends Controller
         
         $request->validate([
             'hospitalName' => 'required|min:0|max:255|',
-            'hospitalID' => 'required|min:0|max:12|unique:hospitals',
+            //'hospitalID' => 'required|min:0|max:12|unique:hospitals',
             'email' => 'required|email|unique:hospitals',
+            'hospitalLink' => 'required|',
             'phoneNo' => 'required|min:9|max:11|regex:/^\(?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
             'address' => 'required|min:5|max:255|',
             'zipCode' => 'required|min:0|max:5|',
-            'state' => 'required|min:5|max:20|',
+            'stateID' => 'required',
+            'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()
                         ],
@@ -54,12 +68,14 @@ class RegisteredHospitalsController extends Controller
 
         $hospitals = Hospitals::create([
             'hospitalName' => $request->hospitalName,
-            'hospitalID' => $request->hospitalID,
+            //'hospitalID' => $request->hospitalID,
             'email' => $request->email,
+            'hospitalLink' => $request->hospitalLink,
             'phoneNo' => $request->phoneNo,
             'address' => $request->address,
             'zipCode' => $request->zipCode,
-            'state' => $request->state,
+            'stateID' => $request->stateID,
+            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

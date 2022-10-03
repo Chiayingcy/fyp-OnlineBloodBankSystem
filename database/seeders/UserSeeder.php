@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'      => 'Donor',
-            'ic'        => '010101-07-0123',
+            'ic'        => '010101070123',
             'age'       => '21',   
             'email'     => 'donor@gmail.com',
             'bloodType' => 'O+',

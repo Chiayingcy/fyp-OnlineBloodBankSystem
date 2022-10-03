@@ -17,16 +17,17 @@ Route::get('/', function () {
     return view('home');
 });
 
+Route::get('/home', function () {
+    return view('auth.d_home');
+})->middleware(['auth'])->name('d_home');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
-
-
 Route::get('/admin_dashboard', function () {
     return view('auth.admin_dashboard');
 })->middleware(['auth'])->name('admin_dashboard');
-
 
 Route::get('/hospitals_list', function () {
     return view('auth.hospitals_list');
@@ -34,14 +35,18 @@ Route::get('/hospitals_list', function () {
 
 require __DIR__.'/auth.php';
 
-Route::get('Donor/auth/login', function () {
-    return view('Donor/auth/login');
-});
-
 Route::get('auth/t&c', function () {
     return view('auth/t&c');
 });
 
 Route::post('auth/t&c', function () {
     return view('auth/t&c');
+});
+
+Route::get('Hospitals/auth/dashboard', function () {
+    return view('Hospitals.auth.dashboard');
+});
+
+Route::post('Hospitals/auth/dashboard', function () {
+    return view('Hospitals.auth.dashboard');
 });

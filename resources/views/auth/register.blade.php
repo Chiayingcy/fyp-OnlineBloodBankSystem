@@ -30,7 +30,7 @@
             <div class="mt-4">
                 <x-input-label for="ic" :value="__('Identification Number')" />
 
-                <x-text-input id="ic" class="block mt-1 w-full" type="text" name="ic" placeholder="I.C. Format: 010101-01-0101" :value="old('ic')" required />
+                <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" placeholder="I.C. Format: 010101010101 without any symbol" :value="old('ic')" required />
             </div>
             
              <!-- Age -->
@@ -47,7 +47,7 @@
             </div>
 
             <!-- Blood Type -->
-            <div class="mt-4">
+            <!--<div class="mt-4">
                 <x-input-label for="bloodType" :value="__('Blood Type')" />
                 <select id="bloodType" class="block mt-1 w-full" name="bloodType" required>
                 <option selected>Select Blood Type</option>
@@ -85,6 +85,19 @@
                 </option>
 
             </select>
+            </div>-->
+
+             <!-- Blood Type -->
+             <div class="mt-4">
+            <x-input-label for="bloodType" :value="__('Blood Type')" />
+                <select id="bloodType" class="block mt-1 w-full" name="bloodType" required>
+                <option selected>Select Blood Type</option>
+                    @foreach($bloodType as $bloodType)
+                        <option value="{{ $bloodType->bloodType }}" class="text-dark">{{ $bloodType->bloodType }}</option>
+
+                    @endforeach
+
+                </select>
             </div>
 
             <!-- Gender -->
@@ -120,14 +133,9 @@
             <!-- Zip Code -->
             <div class="mt-4">
                 <x-input-label for="zipCode" :value="__('Zip Code')" />
-                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" min="10000" max="20000" :value="old('zipCode')" required />
+                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" min="10000" max="100000" :value="old('zipCode')" required />
             </div>
 
-            <!-- State
-            <div class="mt-4">
-                <x-input-label for="state" :value="__('State')" />
-                <x-text-input id="state" class="block mt-1 w-full" type="text" name="state" :value="old('state')" required />
-            </div>-->
 
             <!-- State -->
             <div class="mt-4">

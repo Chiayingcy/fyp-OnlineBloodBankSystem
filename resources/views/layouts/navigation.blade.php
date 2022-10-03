@@ -5,19 +5,35 @@
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{ route('dashboard') }}">
+                    <a href="{{url('auth/d_home')}}">
                         <x-application-logo class="block h-20 w-auto fill-current text-gray-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('d_home')" :active="request()->routeIs('d_home')">
+                        {{ __('Home') }}
+                    </x-nav-link>
+
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
-                        {{ __('Hospitals List') }}
+                        {{ __('Hospitals') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
+                        {{ __('Events') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
+                        {{ __('About Us') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
+                        {{ __('Contact Us') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -38,6 +54,10 @@
                     </x-slot>
 
                     <x-slot name="content">
+                        <x-dropdown-link >
+                                {{ __('My Profile') }}
+                        </x-dropdown-link>
+
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
@@ -80,6 +100,10 @@
             </div>
 
             <div class="mt-3 space-y-1">
+                <x-responsive-nav-link>
+                        {{ __('My Profile') }}
+                </x-responsive-nav-link>
+                
                 <!-- Authentication -->
                 <form method="POST" action="{{ route('logout') }}">
                     @csrf

@@ -19,6 +19,18 @@
         <form method="POST" action="{{ route('Admin.register') }}">
             @csrf
 
+            @if(Session::get('fail'))
+                <div class=" alert alert-danger">
+                    {{Session::get('fail')}}
+                </div>
+            @endif
+
+            @if(Session::get('success'))
+                <div class=" alert alert-success">
+                    {{Session::get('success')}}
+                </div>
+            @endif
+
             <!-- Admin Name -->
             <div>
                 <x-input-label for="adminName" :value="__('Admin Name')" />
@@ -38,6 +50,27 @@
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+            <!-- Role -->
+            <div class="mt-4">
+                <x-input-label for="role" :value="__('Role')" />
+                <select id="role" class="block mt-1 w-full" name="role" required>
+                <option selected>Select Your Role</option>
+
+                <option value="1" name="role" id="donor">
+                    Donor
+                </option>
+
+                <option value="2" name="role"  id="hospital">
+                    Hospital
+                </option>
+
+                <option value="3" name="role"  id="admin">
+                    Admin
+                </option>
+
+                </select>
             </div>
 
             <!-- Password -->

@@ -25,7 +25,7 @@
 </head>
 
 <body>
-    <div class ="flex col-4 justify-content-center ">
+    <div class ="d-flex justify-content-center">
     <div class="card">
     <h5 class="card-header">Terms and Conditions!</h5>
     <div class="card-body">

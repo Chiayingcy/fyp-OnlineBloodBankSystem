@@ -31,7 +31,7 @@
             <div class="mt-4">
                 <x-input-label for="ic" :value="__('Identifiaction Number (I.C. No.)')" />
 
-                <x-text-input id="ic" class="block mt-1 w-full" type="text" name="ic" :value="old('ic')" required autofocus />
+                <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" placeholder="I.C. Format: 010101010101 without any symbol" :value="old('ic')" required autofocus />
             </div>
 
             <!-- Password -->

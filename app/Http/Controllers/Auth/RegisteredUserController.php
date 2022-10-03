@@ -3,8 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\BloodType;
 use App\Models\User;
 use App\Models\State;
+use App\Models\Hospitals;
+
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
@@ -22,8 +25,9 @@ class RegisteredUserController extends Controller
     public function create()
     {
         $States = State::all();
+        $bloodType = BloodType::all();
 
-        return view('auth.register', compact('States'));
+        return view('auth.register', compact('States'), compact('bloodType'));
     }
 
     /**
@@ -36,21 +40,9 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-       //  $request->validate([
-        //    'name' => ['required', 'string', 'max:255'],
-        //    'ic' => ['required', 'string', 'ic', 'min:12', 'max:12', 'regex:/(01)[0-9]{9}/', 'unique:users'],
-        //    'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-        //    'bloodType' => ['required', 'string', 'bloodType', 'min:10 | max:11'],
-        //    'gender' => ['required', 'string', 'gender', 'min:4 | max:6'],
-        //    'phoneNo' => ['required', 'integer', 'phoneNo', 'regex:/(01)[0-9]{9}/','min:10 | max:11'],
-        //    'address' => ['required', 'string', 'address', 'max:255'],
-        //    'zipCode' => ['required', 'integer', 'zipCode', 'min:5 | max:5'],
-        //    'password' => ['required', 'confirmed', Rules\Password::defaults()],
-        //]);
-
         $request->validate([
             'name' => 'required|min:0|max:255|',
-            'ic' => 'required|min:0|max:14|unique:users',
+            'ic' => 'required|min:0|max:12|unique:users',
             'age' => 'required|min:2|max:5|',
             'email' => 'required|email|unique:users',
             'bloodType' => 'required',
@@ -89,5 +81,15 @@ class RegisteredUserController extends Controller
         Auth::login($user);
 
         return redirect(RouteServiceProvider::HOME);
+    }
+
+
+    public function search()
+    {
+        $searchHospital = $_GET['search'];
+        $Hospitals = Hospitals::where('hospitalName', 'LIKE', '%'.$searchHospital.'%')->get();
+
+
+        return view('auth.searchHospital', compact('Hospitals'));
     }
 }

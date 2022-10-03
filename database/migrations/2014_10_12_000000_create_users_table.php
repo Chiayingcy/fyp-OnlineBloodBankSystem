@@ -17,7 +17,7 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name', 100);
-            $table->string('ic', 14)->unique();
+            $table->string('ic', 12)->unique();
             $table->integer('age');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
@@ -32,7 +32,8 @@ return new class extends Migration
 
             // This ensures that the state_code must be a valid / existing one
             $table->unsignedBigInteger('stateID');
-           // $table->foreign('stateID')->references('stateID')->on('states')->onUpdate('cascade')->onDelete('cascade');
+
+            //$table->foreign('stateID')->references('stateID')->on('states')->onUpdate('cascade')->onDelete('cascade');
           // $table->foreignId('stateID')->constrained('states');
 
 

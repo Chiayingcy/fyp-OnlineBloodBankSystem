@@ -1,4 +1,18 @@
 <title>Hospitals Registration</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- CSS for toggle eye icon -->
+<style>
+    .fa-eye{
+  position: absolute;
+  top: 69.5%;
+  right: 8%;
+  cursor: pointer;
+  color: lightgray;
+}
+</style>
+
+
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
 
@@ -26,18 +40,25 @@
                 <x-text-input id="hospitalName" class="block mt-1 w-full" type="text" name="hospitalName" :value="old('hospitalName')" required autofocus />
             </div>
 
-            <!-- Hospital ID -->
+            <!-- Hospital ID 
             <div class="mt-4">
                 <x-input-label for="hospitalID" :value="__('Hospital ID')" />
 
                 <x-text-input id="hospitalID" class="block mt-1 w-full" type="text" name="hospitalID" :value="old('hospitalID')" required />
-            </div>
+            </div>-->
 
             <!-- Email Address -->
             <div class="mt-4">
                 <x-input-label for="email" :value="__('Email')" />
 
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
+            </div>
+
+             <!-- Hospital Website Link --> 
+            <div class="mt-4">
+                <x-input-label for="hospitalLink" :value="__('Hospital Website Link')" />
+
+                <x-text-input id="hospitalLink" class="block mt-1 w-full" type="text" name="hospitalLink" :value="old('hospitalLink')" required/>
             </div>
 
             <!-- Contact Number -->
@@ -58,10 +79,38 @@
                 <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" :value="old('zipCode')" required />
             </div>
 
-            <!-- State -->
+           <!-- State -->
+           <div class="mt-4">
+            <x-input-label for="stateID" :value="__('State')" />
+                <select id="stateID" class="block mt-1 w-full" name="stateID" required>
+                <option selected>Select Your State</option>
+                    @foreach($States as $state)
+                        <option value="{{ $state->stateID }}" class="text-dark">{{ $state->stateName }}</option>
+
+                    @endforeach
+
+                </select>
+            </div>
+
+            <!-- Role -->
             <div class="mt-4">
-                <x-input-label for="state" :value="__('State')" />
-                <x-text-input id="state" class="block mt-1 w-full" type="text" name="state" :value="old('state')" required />
+                <x-input-label for="role" :value="__('Role')" />
+                <select id="role" class="block mt-1 w-full" name="role" required>
+                <option selected>Select Your Role</option>
+
+                <option value="1" name="role" id="donor">
+                    Donor
+                </option>
+
+                <option value="2" name="role"  id="hospital">
+                    Hospital
+                </option>
+
+                <option value="3" name="role"  id="admin">
+                    Admin
+                </option>
+
+                </select>
             </div>
 
             <!-- Password -->
@@ -72,7 +121,10 @@
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
+                    
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span>    
 
+                <br/>
                 <small id="passwordHelpInline" class= "text-danger">
                     Password must be :
                     <ul>
@@ -111,3 +163,19 @@
     </div>
 
 </x-guest-layout>
+
+
+<!-- Password Visibility -->
+<script> 
+    const passwordField = document.querySelector("#password");
+    const eyeIcon= document.querySelector("#eye");
+
+    eye.addEventListener("click", function(){
+    // toggle the eye slash icon
+    this.classList.toggle("fa-eye-slash");
+
+    // toggle the type attribute
+    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+    passwordField.setAttribute("type", type);
+    })
+</script>
