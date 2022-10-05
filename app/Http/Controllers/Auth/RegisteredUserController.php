@@ -27,6 +27,8 @@ class RegisteredUserController extends Controller
         $States = State::all();
         $bloodType = BloodType::all();
 
+
+
         return view('auth.register', compact('States'), compact('bloodType'));
     }
 

@@ -29,9 +29,9 @@ Route::get('/admin_dashboard', function () {
     return view('auth.admin_dashboard');
 })->middleware(['auth'])->name('admin_dashboard');
 
-Route::get('/hospitals_list', function () {
+/*Route::get('/hospitals_list', function () {
     return view('auth.hospitals_list');
-})->middleware(['auth'])->name('hospitals_list');
+})->middleware(['auth'])->name('hospitals_list');*/
 
 require __DIR__.'/auth.php';
 
@@ -42,6 +42,11 @@ Route::get('auth/t&c', function () {
 Route::post('auth/t&c', function () {
     return view('auth/t&c');
 });
+
+
+Route::get('/gaboutUs', function () {
+    return view('aboutUs');
+})->name('gaboutUs');
 
 Route::get('Hospitals/auth/dashboard', function () {
     return view('Hospitals.auth.dashboard');

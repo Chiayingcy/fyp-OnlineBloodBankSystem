@@ -1,4 +1,18 @@
 <title>Donor Login</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- CSS for toggle eye icon -->
+<style>
+    .fa-eye{
+  position: absolute;
+  margin-top: 2%;
+  margin-left: 58%;;
+  cursor: pointer;
+  color: lightgray;
+}
+</style>
+
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
    
@@ -37,7 +51,8 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
-
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
+            
                 <x-text-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
@@ -76,3 +91,18 @@
 </section>
 </x-guest-layout>
 
+
+<!-- Password Visibility -->
+<script> 
+    const passwordField = document.querySelector("#password");
+    const eyeIcon= document.querySelector("#eye");
+
+    eye.addEventListener("click", function(){
+    // toggle the eye slash icon
+    this.classList.toggle("fa-eye-slash");
+
+    // toggle the type attribute
+    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+    passwordField.setAttribute("type", type);
+    })
+</script>

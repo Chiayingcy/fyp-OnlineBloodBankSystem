@@ -1,4 +1,19 @@
 <title>Donor Registration</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
+<!-- CSS for toggle eye icon -->
+<style>
+    .fa-eye{
+  position: absolute;
+  margin-top: 3%;
+  margin-left: 83%;
+  cursor: pointer;
+  color: lightgray;
+}
+</style>
+
+
+
 <x-guest-layout>
 <section class="bg-image" style="background-image: url('/Images/background1.png');">
 
@@ -174,11 +189,14 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
 
                 <x-text-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
+
+                    
 
                 <small id="passwordHelpInline" class= "text-danger">
                     Password must be :
@@ -195,10 +213,13 @@
             <!-- Confirm Password -->
             <div class="mt-4">
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <span><i class="fa-solid fa-eye" name ="eye_confirmation" id="eye_confirmation"></i></span>
 
                 <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
                                 name="password_confirmation" required />
+
+                                
 
         <div class="mt-4">
             <div class="form-check">
@@ -232,3 +253,35 @@
 </div>
 
 </x-guest-layout>
+
+
+
+<!-- Password Visibility -->
+<script> 
+    const passwordField = document.querySelector("#password");
+    const eyeIcon= document.querySelector("#eye");
+
+    eye.addEventListener("click", function()
+    {
+        // toggle the eye slash icon
+        this.classList.toggle("fa-eye-slash");
+
+        // toggle the type attribute
+        const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        passwordField.setAttribute("type", type);
+    })
+
+    
+    const password_confirmationField = document.querySelector("#password_confirmation");
+    const eyeIconConfirmation= document.querySelector("#eye_confirmation");
+    
+    eyeIconConfirmation.addEventListener("click", function()
+    {
+        // toggle the eye slash icon
+        this.classList.toggle("fa-eye-slash");
+
+        // toggle the type attribute
+        const type = password_confirmationField.getAttribute("type") === "password" ? "text" : "password";
+        password_confirmationField.setAttribute("type", type);
+    })
+</script>

@@ -20,11 +20,11 @@
 	        </li>
 
 			<li class="nav-item">
-                <a class="nav-link" href="#">About Us</a>
+                <a class="nav-link" href="{{ route ('gaboutUs') }}">About Us</a>
 	        </li>
 
 			<li class="nav-item">
-                <a class="nav-link" href="#">Contact Us</a>
+                <a class="nav-link" href="{{ route ('contactUs') }}">Contact Us</a>
 	        </li>
         </ul>
 

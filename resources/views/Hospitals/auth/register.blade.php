@@ -1,3 +1,4 @@
+
 <title>Hospitals Registration</title>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 
@@ -5,12 +6,13 @@
 <style>
     .fa-eye{
   position: absolute;
-  top: 69.5%;
-  right: 8%;
+  margin-top: 3%;
+  margin-left: 83%;
   cursor: pointer;
   color: lightgray;
 }
 </style>
+
 
 
 <x-guest-layout>
@@ -43,7 +45,6 @@
             <!-- Hospital ID 
             <div class="mt-4">
                 <x-input-label for="hospitalID" :value="__('Hospital ID')" />
-
                 <x-text-input id="hospitalID" class="block mt-1 w-full" type="text" name="hospitalID" :value="old('hospitalID')" required />
             </div>-->
 
@@ -58,13 +59,13 @@
             <div class="mt-4">
                 <x-input-label for="hospitalLink" :value="__('Hospital Website Link')" />
 
-                <x-text-input id="hospitalLink" class="block mt-1 w-full" type="text" name="hospitalLink" :value="old('hospitalLink')" required/>
+                <x-text-input id="hospitalLink" class="block mt-1 w-full" type="text" name="hospitalLink" placeholder="https://exampleHospitalLink.com" :value="old('hospitalLink')" required/>
             </div>
 
             <!-- Contact Number -->
             <div class="mt-4">
                 <x-input-label for="phoneNo" :value="__('Contact Number')" />
-                <x-text-input id="phoneNo" class="block mt-1 w-full" type="tel" name="phoneNo" :value="old('phoneNo')" required />
+                <x-text-input id="phoneNo" class="block mt-1 w-full" type="tel" name="phoneNo" placeholder="Example: 046565123 without any symbol"  :value="old('phoneNo')" required />
             </div>
 
             <!-- Address -->
@@ -76,7 +77,7 @@
             <!-- Zip Code -->
             <div class="mt-4">
                 <x-input-label for="zipCode" :value="__('Zip Code')" />
-                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" :value="old('zipCode')" required />
+                <x-text-input id="zipCode" class="block mt-1 w-full" type="number" name="zipCode" placeholder="Example: xxxxx" :value="old('zipCode')" required />
             </div>
 
            <!-- State -->
@@ -116,14 +117,15 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
+
 
                 <x-text-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
                                 required autocomplete="new-password" />
                     
-                    <span><i class="fa-solid fa-eye" id="eye"></i></span>    
-
+                   
                 <br/>
                 <small id="passwordHelpInline" class= "text-danger">
                     Password must be :
@@ -140,6 +142,7 @@
             <!-- Confirm Password -->
             <div class="mt-4">
                 <x-input-label for="password_confirmation" :value="__('Confirm Password')" />
+                    <span><i class="fa-solid fa-eye" name ="eye_confirmation" id="eye_confirmation"></i></span>
 
                 <x-text-input id="password_confirmation" class="block mt-1 w-full"
                                 type="password"
@@ -170,12 +173,27 @@
     const passwordField = document.querySelector("#password");
     const eyeIcon= document.querySelector("#eye");
 
-    eye.addEventListener("click", function(){
-    // toggle the eye slash icon
-    this.classList.toggle("fa-eye-slash");
+    eye.addEventListener("click", function()
+    {
+        // toggle the eye slash icon
+        this.classList.toggle("fa-eye-slash");
 
-    // toggle the type attribute
-    const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
-    passwordField.setAttribute("type", type);
+        // toggle the type attribute
+        const type = passwordField.getAttribute("type") === "password" ? "text" : "password";
+        passwordField.setAttribute("type", type);
+    })
+
+    
+    const password_confirmationField = document.querySelector("#password_confirmation");
+    const eyeIconConfirmation= document.querySelector("#eye_confirmation");
+    
+    eyeIconConfirmation.addEventListener("click", function()
+    {
+        // toggle the eye slash icon
+        this.classList.toggle("fa-eye-slash");
+
+        // toggle the type attribute
+        const type = password_confirmationField.getAttribute("type") === "password" ? "text" : "password";
+        password_confirmationField.setAttribute("type", type);
     })
 </script>

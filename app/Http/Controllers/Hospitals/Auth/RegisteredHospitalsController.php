@@ -23,7 +23,6 @@ class RegisteredHospitalsController extends Controller
      */
     public function create()
     {
-
         $States = State::all();
         return view('Hospitals.auth.register', compact('States'));
     }
@@ -31,8 +30,9 @@ class RegisteredHospitalsController extends Controller
     /* This is to print all the hospitals from hospital table in database in Hospital List view for donor*/
     public function viewHospitals()
     {
-
         $Hospitals = Hospitals::all();
+        $Hospitals = Hospitals::sortable()->paginate(5);
+
         return view('auth.hospitals_list', compact('Hospitals'));
     }
 

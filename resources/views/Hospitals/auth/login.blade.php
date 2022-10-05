@@ -6,8 +6,8 @@
 <style>
     .fa-eye{
   position: absolute;
-  top: 58.2%;
-  right: 20%;
+  margin-top: 2%;
+  margin-left: 58%;;
   cursor: pointer;
   color: lightgray;
 }
@@ -51,14 +51,14 @@
             <!-- Password -->
             <div class="mt-4">
                 <x-input-label for="password" :value="__('Password')" />
-
+                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
+            
                 <x-text-input id="password" class="block mt-1 w-full"
                                 type="password"
                                 name="password"
                                 required autocomplete="current-password" />
                     
-                    <span><i class="fa-solid fa-eye" id="eye"></i></span> 
-            </div>
+                   </div>
 
             <!-- Remember Me -->
             <div class="block mt-4">

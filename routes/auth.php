@@ -23,6 +23,9 @@ use App\Http\Controllers\Hospitals\Auth\RegisteredHospitalsController;
 use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 
 use App\Http\Controllers\Auth\VerifyEmailController;
+
+use App\Http\Controllers\Auth\ContactUsController;
+
 use Illuminate\Support\Facades\Route;
 
 #Guest panel routes 
@@ -112,12 +115,20 @@ Route::middleware('auth')->group(function () {
 
     Route::post('hospitals_list', [RegisteredHospitalsController::class, 'viewHospitals']);
 
-    Route::get('hospitals_list', [RegisteredUserController::class, 'search'])
+    Route::get('hospitals_list/search', [RegisteredUserController::class, 'search'])
                 ->name('searchHospitals');
 
     Route::get('/auth/donor/home', function () {
         return view('auth.donor_home');
     })->name('home');
+
+    Route::get('/contactUs', [ContactUsController::class, 'create']);
+
+    Route::post('/contactUs', [ContactUsController::class, 'ContactUsForm'])->name('contactUs');
+                
+    Route::get('/aboutUs', function () {
+        return view('auth.aboutUs');
+    })->name('aboutUs');
 
 });
 

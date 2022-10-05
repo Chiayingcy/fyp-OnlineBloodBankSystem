@@ -51,7 +51,7 @@
 
             <!--Search function -->
             <div class="my-2 my-lg-0 float-right">
-            <form action="{{ route('searchHospital') }}" method="GET" role="search">
+            <form action="{{ url('hospitals_list/search') }}" method="GET" role="search">
             <x-text-input id="search" name="search" placeholder="Search Hospital" />
                 <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Hospital">
                         <span class="fas fa-search">
@@ -63,11 +63,11 @@
             <table class="table table-hover table-bordered mx-auto">
                 <thead>
                     <tr>
-                        <th colspan="3" class="align-center bg-dark text-light">Hospital Name</th>
-                        <th colspan="3" class="align-center bg-dark text-light">Hospital Email</th>
+                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hospital Name')</th>
+                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('email', 'Hospital Email')</th>
                         <th colspan="3" class="align-center bg-dark text-light">Hospital Contact Number</th>
                         <th colspan="3" class="align-center bg-dark text-light">Hospital Address</th>
-                        <th colspan="3" class="align-center bg-dark text-light">Hospital Zip Code</th>
+                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('zipCode', 'Hospital Zip Code')</th>
                         <th colspan="3" class="align-center bg-dark text-light">See Details</th>
                         <th colspan="3" class="align-center bg-dark text-light">Make Appointment</th>
                     </tr>
@@ -88,7 +88,8 @@
 
                  @endforeach
                 </tbody>
-            </table>    
+            </table>  
+            {!! $Hospitals->appends(\Request::except('page'))->render() !!}  
         </div>
     </div>
 <br/>
