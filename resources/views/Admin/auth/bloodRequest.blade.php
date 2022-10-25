@@ -161,7 +161,7 @@
                                 <td colspan="3" class="align-center text-dark">
                                     <a href="{{ route('Admin.bloodRequest.edit', $bloodRequest->id) }}"
                                         class="btn btn-primary">
-                                        Details</a></button>
+                                        Approve / Reject</a></button>
                                 </td>
 
                             </tr>

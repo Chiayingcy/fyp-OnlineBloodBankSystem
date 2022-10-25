@@ -94,6 +94,8 @@
                             <th colspan="3" class="align-center bg-dark text-light">Id</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hospital Name')</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('donor', 'Donor')</th>
+                            <th colspan="3" class="align-center bg-dark text-light">@sortablelink('appointmentDate', 'Donor Appointment Date')</th>
+                            <th colspan="3" class="align-center bg-dark text-light">@sortablelink('appointmentTime', 'Donor Appointment Time')</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('appointmentStatus', 'Status')</th>
                             <th colspan="3" class="align-center bg-dark text-light">Action</th>
                         </tr>
@@ -112,6 +114,14 @@
 
                                 <td colspan="3" class="align-center text-dark">
                                     {{ $appo->donor->name }}
+                                </td>
+
+                                <td colspan="3" class="align-center text-dark">
+                                    {{ $appo->appointmentDate }}
+                                </td>
+
+                                <td colspan="3" class="align-center text-dark">
+                                    {{ $appo->appointmentTime }}
                                 </td>
 
                                 <td colspan="3" class="align-center text-dark">
