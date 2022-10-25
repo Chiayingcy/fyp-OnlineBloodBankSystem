@@ -32,8 +32,13 @@
 </head>
 
 <body>
-@include('layouts.navigation')
 
+<x-app-layout>
+<x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('About Us') }}
+        </h2>
+    </x-slot>
 <!-- Page Content -->
 <div class="container mt-5">
 
@@ -67,7 +72,7 @@
 
 </div>
 
-<br/><br/>
+<br/><br/></x-app-layout>
 
 @include('layouts.footer')   
 </body>

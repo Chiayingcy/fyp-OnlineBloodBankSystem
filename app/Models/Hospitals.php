@@ -38,7 +38,7 @@ class Hospitals extends Authenticatable
         'password',
     ];
 
-    public $sortable = ['hospitalName','email', 'zipCode'];
+    public $sortable = ['id','hospitalName','email', 'phoneNo','address','zipCode'];
 
     /**
      * The attributes that should be hidden for serialization.

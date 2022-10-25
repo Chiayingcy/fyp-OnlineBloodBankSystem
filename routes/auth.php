@@ -25,7 +25,26 @@ use App\Http\Controllers\Admin\Auth\RegisteredAdminController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 
 use App\Http\Controllers\Auth\ContactUsController;
+use App\Http\Controllers\Auth\UpdateProfileController;
+use App\Http\Controllers\Auth\DashboardController;
+use App\Http\Controllers\Auth\AppointmentController;
 
+
+use App\Http\Controllers\Admin\Auth\AdminDashboardController;
+use App\Http\Controllers\Admin\Auth\AdminUpdateProfileController;
+use App\Http\Controllers\Admin\Auth\AdminViewBloodBankInventoryController;
+use App\Http\Controllers\Admin\Auth\AdminViewDonorController;
+use App\Http\Controllers\Admin\Auth\AdminViewEventController;
+use App\Http\Controllers\Admin\Auth\AdminViewHospitalsController;
+use App\Http\Controllers\Admin\Auth\AdminBloodRequestController;
+use App\Http\Controllers\Auth\DonorEventController;
+use App\Http\Controllers\Hospitals\Auth\BloodRequestController;
+use App\Http\Controllers\Hospitals\Auth\EventController;
+use App\Http\Controllers\Hospitals\Auth\HospitalsDashboardController;
+use App\Http\Controllers\Hospitals\Auth\HospitalsEditDonorController;
+use App\Http\Controllers\Hospitals\Auth\HospitalsUpdateProfileController;
+use App\Http\Controllers\Hospitals\Auth\HospitalsViewBloodBankInventoryController;
+use App\Http\Controllers\Hospitals\Auth\HospitalsViewDonorController;
 use Illuminate\Support\Facades\Route;
 
 #Guest panel routes 
@@ -42,8 +61,6 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/auth/t&c', [TermsAndConditionsController::class, 'index'])
                 ->name('t&c');
-
-
 
     Route::get('forgot-password', [PasswordResetLinkController::class, 'create'])
                 ->name('password.request');
@@ -63,9 +80,6 @@ Route::middleware('guest')->group(function () {
     Route::post('Admin/auth/forgot-password', [AdminRPass::class, 'store'])
                 ->name('Admin.auth.password.email');
 
-
-
-
     Route::get('reset-password/{token}', [NewPasswordController::class, 'create'])
                 ->name('password.reset');
 
@@ -78,7 +92,7 @@ Route::middleware('guest')->group(function () {
     Route::post('Hospitals/auth/reset-password', [HospitalsNewPasswordController::class, 'store'])
                 ->name('Hospitals.auth.password.update');
 
-    Route::get('Admin/auth/reset-password/{token}', [AdminNewPasswordController::class, 'create'])
+    Route::get('Admin/auth/reset-password/{token?}', [AdminNewPasswordController::class, 'create'])
                 ->name('Admin.auth.password.reset');
 
     Route::post('Admin/auth/reset-password', [AdminNewPasswordController::class, 'store'])
@@ -118,10 +132,6 @@ Route::middleware('auth')->group(function () {
     Route::get('hospitals_list/search', [RegisteredUserController::class, 'search'])
                 ->name('searchHospitals');
 
-    Route::get('/auth/donor/home', function () {
-        return view('auth.donor_home');
-    })->name('home');
-
     Route::get('/contactUs', [ContactUsController::class, 'create']);
 
     Route::post('/contactUs', [ContactUsController::class, 'ContactUsForm'])->name('contactUs');
@@ -129,6 +139,24 @@ Route::middleware('auth')->group(function () {
     Route::get('/aboutUs', function () {
         return view('auth.aboutUs');
     })->name('aboutUs');
+
+    Route::get('/profile', [UpdateProfileController::class, 'index'])->name('profile');
+
+    Route::put('/profile', [UpdateProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+
+    Route::get('/appointment_list/{status?}', [AppointmentController::class, 'index'])->name('appointment.index');
+
+    Route::post('/appointment', [AppointmentController::class, 'store'])->name('appointment.store');
+
+    Route::get('/appointment/delete/{id}', [AppointmentController::class, 'destroy'])->name('appointment.delete');
+
+    Route::resource('appointment', AppointmentController::class);
+
+    Route::get('/event', [DonorEventController::class, 'index'])->name('events');
+
+    Route::get('eventregister/{id}', [DonorEventController::class, 'eventregister'])->name('eventregister');
 
 });
 
@@ -144,11 +172,70 @@ Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
 
     Route::post('/register', [RegisteredHospitalsController::class, 'store']);
 
-    Route::get('/logout', [HosptialsAuth::class, 'destroy'])->name('logout');
+    Route::post('/logout', [HosptialsAuth::class, 'destroy'])->name('logout');
 
-    Route::get('/dashboard', function (){
-        return 'Hospitals';
-    })->middleware('Hospitals');
+    Route::get('/dashboard', [HospitalsDashboardController::class, 'index'])->middleware('Hospitals')->name('dashboard');
+
+
+    Route::get('/profile', [HospitalsUpdateProfileController::class , 'index'])->middleware('auth:Hospitals')->name('hprofile');
+
+    Route::put('/profile', [HospitalsUpdateProfileController::class, 'update'])->middleware('auth:Hospitals')->name('hprofile.update');
+
+    Route::get('/viewDonorList', [HospitalsViewDonorController::class, 'viewDonarList'])->middleware('auth:Hospitals')->name('viewDonorList');
+
+    Route::post('/viewDonorList', [HospitalsViewDonorController::class, 'viewDonarList'])->middleware('auth:Hospitals')->name('viewDonorList');
+
+
+    Route::get('viewDonorList/search', [HospitalsViewDonorController::class, 'searchDonor'])
+    ->name('searchDonorList');
+
+    Route::get('/addDonor', [HospitalsViewDonorController::class, 'create'])
+    ->name('addDonor.create');
+
+    Route::post('/addDonor', [HospitalsViewDonorController::class, 'addDonor'])
+    ->name('addDonor');
+
+    Route::get('/editViewDonor/{id?}', [HospitalsEditDonorController::class, 'editViewDonor'])
+    ->name('editDonor');
+
+    Route::put('/UpdateEditViewDonor/{id}', [HospitalsEditDonorController::class, 'editUpdateDonorInformation'])
+    ->name('editDonor.update');
+
+    Route::get('/event', [EventController::class, 'index'])->name('event');
+
+    Route::get('/event_create', [EventController::class, 'create'])->name('event.create');
+
+    Route::post('/event', [EventController::class, 'submitEvent'])->name('event.submit');
+
+    Route::get('/event/delete/{id}', [EventController::class, 'deleteEvent'])->name('event.delete');
+
+    Route::get('/event/{id?}', [EventController::class, 'edit'])->name('event.edit');
+
+    Route::put('/UpdateEvent/{id}', [EventController::class, 'editUpdateEvent'])->name('event.update');
+
+    Route::get('/viewBloodBankInventory', [HospitalsViewBloodBankInventoryController::class, 'viewBloodBankInventory'])->middleware('auth:Hospitals')->name('viewBloodBankInventory');
+
+    Route::get('/addBloodBankInventory', [HospitalsViewBloodBankInventoryController::class, 'create'])
+    ->name('addBloodBankInventory.create');
+
+    Route::post('/addBloodBankInventory', [HospitalsViewBloodBankInventoryController::class, 'addBlood'])
+    ->name('addBloodBankInventory');
+
+    Route::get('/editUpdateViewBloodBankInventory/{id?}', [HospitalsViewBloodBankInventoryController::class, 'editUpdateViewBloodBankInventory'])
+    ->name('editUpdateViewBloodBankInventory');
+
+    Route::put('/editUpdateViewBloodBankInventory/{id}', [HospitalsViewBloodBankInventoryController::class, 'editUpdateViewBloodBankInventoryInformation'])
+    ->name('editUpdateViewBloodBankInventory.update');
+
+    Route::get('/bloodRequest', [BloodRequestController::class, 'index'])->name('bloodRequest');
+
+    Route::post('/bloodRequest', [BloodRequestController::class, 'store'])->name('bloodRequest.store');
+
+    Route::get('/viewBloodRequest', [BloodRequestController::class, 'viewBloodRequest'])->name('bloodRequest.index');
+
+    Route::get('/viewBloodRequest/delete/{id}', [BloodRequestController::class, 'destroy'])->name('bloodRequest.delete');
+
+    Route::get('/viewDonorAppointment', [HospitalsDashboardController::class, 'viewDonorAppointment'])->middleware('Hospitals')->name('viewDonorAppointment');
 });
 
 
@@ -163,9 +250,73 @@ Route::prefix('/Admin')->name('Admin.')->group(function (){
 
     Route::post('/register', [RegisteredAdminController::class, 'store']);
 
-    Route::get('/logout', [AdminAuth::class, 'destroy'])->name('logout');
+    Route::post('/logout', [AdminAuth::class, 'destroy'])->name('logout');
 
-    Route::get('/dashboard', function (){
-        return 'Admin';
-    })->middleware('Admin');
+    Route::get('/dashboard', [AdminDashboardController::class, 'index'])
+    ->name('dashbaord')->middleware('Admin');
+
+    Route::get('/profile', [AdminUpdateProfileController::class , 'index'])->middleware('auth:Admin')->name('profile');
+
+    Route::put('/profile', [AdminUpdateProfileController::class, 'update'])->middleware('auth:Admin')->name('profile.update');
+
+    Route::get('/viewDonorList', [AdminViewDonorController::class, 'viewDonarList'])->middleware('auth:Admin')->name('viewDonorList');
+
+    Route::post('/viewDonorList', [AdminViewDonorController::class, 'viewDonarList'])->middleware('auth:Admin')->name('viewDonorList');
+ 
+    Route::get('viewDonorList/search', [AdminViewDonorController::class, 'searchDonor'])
+    ->name('searchDonorList');
+
+    Route::get('/addDonor', [AdminViewDonorController::class, 'create'])
+    ->name('addDonor.create');
+
+    Route::post('/addDonor', [AdminViewDonorController::class, 'addDonor'])
+    ->name('addDonor');
+
+    Route::get('/editViewDonor/{id?}', [AdminViewDonorController::class, 'editViewDonor'])
+    ->name('editDonor');
+
+    Route::put('/UpdateEditViewDonor/{id}', [AdminViewDonorController::class, 'editUpdateDonorInformation'])
+    ->name('editDonor.update');
+
+    Route::get('/AppointmentsDonor', [AdminViewDonorController::class, 'AppointmentsDonor'])
+        ->name('AppointmentsDonor');
+
+    Route::get('/AppointmentsDonorDetail/{id}', [AdminViewDonorController::class, 'AppointmentsDonorDetail'])
+        ->name('AppointmentsDonorDetail');
+    Route::post('/AppointmentsDonorDetailupdate/{id}', [AdminViewDonorController::class, 'AppointmentsDonorDetailupdate'])
+        ->name('AppointmentsDonorDetailupdate');
+
+
+    Route::get('/event', [AdminViewEventController::class, 'index'])->name('event');
+
+    Route::get('event/search', [AdminViewEventController::class, 'searchEvent'])
+    ->name('searchEvent');
+
+    Route::get('/viewHospitalsList', [AdminViewHospitalsController::class, 'viewHospitalsList'])->name('viewHospitalsList');
+
+    Route::post('/viewHospitalsList', [AdminViewHospitalsController::class, 'viewHospitalsList'])->name('viewHospitalsList');
+ 
+    Route::get('viewHospitalsList/search', [AdminViewHospitalsController::class, 'searchHospitals'])
+    ->name('searchHospitalsList');
+
+    Route::get('/addHospital', [AdminViewHospitalsController::class, 'create'])
+    ->name('addHospital.create');
+
+    Route::post('/addHospital', [AdminViewHospitalsController::class, 'addHospital'])
+    ->name('addHospital');
+
+    Route::get('/viewBloodBankInventory', [AdminViewBloodBankInventoryController::class, 'viewBloodBankInventory'])->name('viewBloodBankInventory');
+
+    Route::get('/bloodRequestAllList', [AdminBloodRequestController::class, 'index'])->name('bloodRequest.index');
+
+    Route::get('/bloodRequestList/edit/{id}', [AdminBloodRequestController::class, 'edit'])->name('bloodRequest.edit');
+
+    Route::put('bloodRequestList/update/{id}', [AdminBloodRequestController::class, 'update'])->name('bloodRequest.update');
+
+
+    Route::get('bloodRequestList/{id}', [AdminBloodRequestController::class, 'request'])->name('bloodRequest');
+    Route::get('bloodRequestList/{id}', [AdminBloodRequestController::class, 'request'])->name('bloodRequest');
+    Route::post('sendBloodRequest/{id}', [AdminBloodRequestController::class, 'sendBloodRequest'])->name('sendBloodRequest');
+    
+
 });

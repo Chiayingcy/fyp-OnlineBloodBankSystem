@@ -82,7 +82,7 @@
                     <td colspan="3" class="align-center text-dark">{{ $hospital->address }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $hospital->zipCode }}</td>
                     <td colspan="3" class="align-center text-dark"><button type='button align-center' class='btn btn-primary'><a href="{{ $hospital->hospitalLink }}">See Details</a></button> </td>
-                    <td colspan="3" class="align-center text-dark"><button type='button align-center' class='btn btn-primary'><a href="{{ route ('register') }}">Make Appointment</a></button> </td>
+                    <td colspan="3" class="align-center text-dark"><button type='button align-center' class='btn btn-primary'><a href="{{ route ('appointment.index') }}">Make Appointment</a></button> </td>
                     </tr>
 
 

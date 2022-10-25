@@ -15,23 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/home', function () {
     return view('auth.d_home');
 })->middleware(['auth'])->name('d_home');
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
-
-Route::get('/admin_dashboard', function () {
-    return view('auth.admin_dashboard');
-})->middleware(['auth'])->name('admin_dashboard');
-
-/*Route::get('/hospitals_list', function () {
-    return view('auth.hospitals_list');
-})->middleware(['auth'])->name('hospitals_list');*/
 
 require __DIR__.'/auth.php';
 
@@ -48,10 +36,3 @@ Route::get('/gaboutUs', function () {
     return view('aboutUs');
 })->name('gaboutUs');
 
-Route::get('Hospitals/auth/dashboard', function () {
-    return view('Hospitals.auth.dashboard');
-});
-
-Route::post('Hospitals/auth/dashboard', function () {
-    return view('Hospitals.auth.dashboard');
-});

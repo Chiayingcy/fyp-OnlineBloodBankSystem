@@ -22,6 +22,7 @@ class DatabaseSeeder extends Seeder
             StateSeeder::class,
             BloodTypeSeeder::class,
             RoleSeeder::class,
+            UserTestSeeder::class,
         ]);
 
     }

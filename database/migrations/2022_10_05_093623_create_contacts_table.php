@@ -21,6 +21,9 @@ return new class extends Migration
             $table->string('subject');
             $table->text('message');
             $table->timestamps();
+
+            $table->unsignedBigInteger('userID');
+            $table->foreign('userID')->references('id')->on('users');
         });
     }
 

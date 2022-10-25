@@ -121,6 +121,7 @@
     </form>
     </div>
 
+    <br/><br/>
 </x-app-layout> 
 
 @include('layouts.footer')  

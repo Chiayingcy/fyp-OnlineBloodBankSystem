@@ -8,10 +8,13 @@ use App\Models\User;
 use App\Models\State;
 use App\Models\Hospitals;
 
+use App\Models\userTest;
+
 use App\Providers\RouteServiceProvider;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
 
@@ -26,8 +29,6 @@ class RegisteredUserController extends Controller
     {
         $States = State::all();
         $bloodType = BloodType::all();
-
-
 
         return view('auth.register', compact('States'), compact('bloodType'));
     }
@@ -44,16 +45,15 @@ class RegisteredUserController extends Controller
     {
         $request->validate([
             'name' => 'required|min:0|max:255|',
-            'ic' => 'required|min:0|max:12|unique:users',
+            'ic' => 'required|max:12|unique:users',
             'age' => 'required|min:2|max:5|',
             'email' => 'required|email|unique:users',
             'bloodType' => 'required',
             'gender' => 'required|min:4|max:255|',
-            'phoneNo' => 'required|numeric|min:10|',
+            'phoneNo' => 'required|numeric|min:10|regex:/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
             'address' => 'required|min:5|max:255|',
             'zipCode' => 'required|min:0|max:5|',
             'stateID' => 'required|',
-            'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()
                         ],
@@ -65,6 +65,8 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
+            //'ic' => substr_replace($request->ic, 'xxxxxx', 3, 8),
+            //'ic' => Crypt::encrypt($request->ic),
             'ic' => $request->ic,
             'age' => $request->age,
             'email' => $request->email,
@@ -74,7 +76,6 @@ class RegisteredUserController extends Controller
             'address' => $request->address,
             'zipCode' => $request->zipCode,
             'stateID' => $request->stateID,
-            'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

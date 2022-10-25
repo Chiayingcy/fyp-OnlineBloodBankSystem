@@ -48,8 +48,8 @@
                 <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" placeholder="I.C. Format: 010101010101 without any symbol" :value="old('ic')" required />
             </div>
             
-             <!-- Age -->
-             <div class="mt-4">
+            <!-- Age -->
+            <div class="mt-4">
                 <x-input-label for="age" :value="__('Age')" />
                 <x-text-input id="age" class="block mt-1 w-full" type="number" name="age" min="18" max="65" :value="old('age')" required />
             </div>
@@ -102,13 +102,13 @@
             </select>
             </div>-->
 
-             <!-- Blood Type -->
-             <div class="mt-4">
+            <!-- Blood Type -->
+            <div class="mt-4">
             <x-input-label for="bloodType" :value="__('Blood Type')" />
                 <select id="bloodType" class="block mt-1 w-full" name="bloodType" required>
-                <option selected>Select Blood Type</option>
+                <option value="">Select Blood Type</option>
                     @foreach($bloodType as $bloodType)
-                        <option value="{{ $bloodType->bloodType }}" class="text-dark">{{ $bloodType->bloodType }}</option>
+                        <option value="{{ $bloodType->id }}" class="text-dark">{{ $bloodType->bloodType }}</option>
 
                     @endforeach
 
@@ -119,7 +119,7 @@
             <div class="mt-4">
                 <x-input-label for="gender" :value="__('Gender')" />
                 <select id="gender" class="block mt-1 w-full" name="gender" required>
-                <option selected>Select Gender</option>
+                <option value="">Select Gender</option>
 
                 <option value="male" name="gender" id="1">
                     Male
@@ -156,7 +156,7 @@
             <div class="mt-4">
             <x-input-label for="stateID" :value="__('State')" />
                 <select id="stateID" class="block mt-1 w-full" name="stateID" required>
-                <option selected>Select Your State</option>
+                <option value="">Select Your State</option>
                     @foreach($States as $state)
                         <option value="{{ $state->stateID }}" class="text-dark">{{ $state->stateName }}</option>
 
@@ -165,7 +165,7 @@
                 </select>
             </div>
 
-            <!-- Role -->
+            <!-- Role 
             <div class="mt-4">
                 <x-input-label for="role" :value="__('Role')" />
                 <select id="role" class="block mt-1 w-full" name="role" required>
@@ -184,7 +184,7 @@
                 </option>
 
                 </select>
-            </div>
+            </div>-->
 
             <!-- Password -->
             <div class="mt-4">

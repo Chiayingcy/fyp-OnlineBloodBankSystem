@@ -56,7 +56,7 @@ class RegisteredHospitalsController extends Controller
             'address' => 'required|min:5|max:255|',
             'zipCode' => 'required|min:0|max:5|',
             'stateID' => 'required',
-            'role' => 'required|min:1|max:1|',
+            //'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()
                         ],
@@ -75,7 +75,7 @@ class RegisteredHospitalsController extends Controller
             'address' => $request->address,
             'zipCode' => $request->zipCode,
             'stateID' => $request->stateID,
-            'role' => $request->role,
+            //'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

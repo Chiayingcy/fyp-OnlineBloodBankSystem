@@ -84,16 +84,20 @@
            <div class="mt-4">
             <x-input-label for="stateID" :value="__('State')" />
                 <select id="stateID" class="block mt-1 w-full" name="stateID" required>
-                <option selected>Select Your State</option>
-                    @foreach($States as $state)
+                <option value="">Select Your State</option>
+                    <!--@foreach($States as $state)
                         <option value="{{ $state->stateID }}" class="text-dark">{{ $state->stateName }}</option>
 
-                    @endforeach
+                    @endforeach-->
+
+                    <option value="7" name="stateID" id="stateID">
+                        Penang
+                    </option>
 
                 </select>
             </div>
 
-            <!-- Role -->
+            <!-- Role 
             <div class="mt-4">
                 <x-input-label for="role" :value="__('Role')" />
                 <select id="role" class="block mt-1 w-full" name="role" required>
@@ -112,7 +116,7 @@
                 </option>
 
                 </select>
-            </div>
+            </div>-->
 
             <!-- Password -->
             <div class="mt-4">

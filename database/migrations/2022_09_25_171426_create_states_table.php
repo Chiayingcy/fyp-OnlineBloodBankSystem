@@ -15,7 +15,8 @@ return new class extends Migration
     {
         Schema::create('states', function (Blueprint $table) {
             //$table->increments('id');
-            $table->bigIncrements('stateID');
+            //$table->bigIncrements('stateID');
+            $table->id('stateID');
             $table->string('stateCode', 5);
             $table->string('stateName', 25)->unique();
         });

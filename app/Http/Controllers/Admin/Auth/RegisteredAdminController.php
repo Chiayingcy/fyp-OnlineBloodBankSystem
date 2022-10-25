@@ -39,7 +39,7 @@ class RegisteredAdminController extends Controller
             'adminName' => 'required|min:0|max:255|',
             'adminID' => 'required|min:0|max:12|unique:admin',
             'email' => 'required|email|unique:hospitals',
-            'role' => 'required|min:1|max:1|',
+            //'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()
                         ],
@@ -53,13 +53,13 @@ class RegisteredAdminController extends Controller
             'adminName' => $request->adminName,
             'adminID' => $request->adminID,
             'email' => $request->email,
-            'role' => $request->role,
+           // 'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 
         event(new Registered($admin));
 
-        Auth::login($admin);
+        Auth::guard('admin')->login($admin);
 
         return redirect(RouteServiceProvider::ADMIN_HOME);
     }

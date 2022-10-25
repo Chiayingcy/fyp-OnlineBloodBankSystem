@@ -198,6 +198,7 @@ return [
         //sortable provider
         Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
 
+
     ],
 
     /*

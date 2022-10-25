@@ -65,7 +65,7 @@
                 <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             </div>
 
-            <!-- Role -->
+            <!-- Role 
             <div class="mt-4">
                 <x-input-label for="role" :value="__('Role')" />
                 <select id="role" class="block mt-1 w-full" name="role" required>
@@ -84,7 +84,7 @@
                 </option>
 
                 </select>
-            </div>
+            </div> -->
 
             <!-- Password -->
             <div class="mt-4">

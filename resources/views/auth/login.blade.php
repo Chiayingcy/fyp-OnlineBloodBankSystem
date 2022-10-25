@@ -6,8 +6,8 @@
 <style>
     .fa-eye{
   position: absolute;
-  margin-top: 2%;
-  margin-left: 58%;;
+  margin-top: 3%;
+  margin-left: 73%;;
   cursor: pointer;
   color: lightgray;
 }
@@ -24,9 +24,6 @@
                  <img src="{{ asset('Images/logo.gif') }}" style="width: 150px" />
             </a>
         </x-slot>
-
-        <!-- Session Status -->
-        <x-auth-session-status class="mb-4" :status="session('status')" />
 
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />

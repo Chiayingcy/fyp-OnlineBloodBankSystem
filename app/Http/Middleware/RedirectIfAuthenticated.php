@@ -23,6 +23,16 @@ class RedirectIfAuthenticated
 
         foreach ($guards as $guard) {
             if (Auth::guard($guard)->check()) {
+                if ($guard == 'Hospitals')
+                {
+                    return redirect(RouteServiceProvider::HOSPITALS_HOME);
+                }
+
+                if ($guard == 'Admin')
+                {
+                    return redirect(RouteServiceProvider::ADMIN_HOME);
+                }
+
                 return redirect(RouteServiceProvider::HOME);
             }
         }

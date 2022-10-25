@@ -1,40 +1,46 @@
 <nav x-data="{ open: false }" class="border-b border-gray-100" style="background-color:#ff5c5c;">
+
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
-                    <a href="{{url('d_home')}}">
-                        <x-application-logo class="block h-20 w-auto fill-current text-gray-600" />
+                    <a href="{{route('d_home')}}">
+                        <x-application-logo class="block h-20 w-auto fill-current text-dark-600" />
                     </a>
                 </div>
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
-                    <x-nav-link :href="route('d_home')" :active="request()->routeIs('d_home')">
+                    <x-nav-link :href="route('d_home')" class="text-dark" :active="request()->routeIs('d_home')">
                         {{ __('Home') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard')" class="text-dark" :active="request()->routeIs('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
+                    <x-nav-link :href="route('hospitals_list')" class="text-dark" :active="request()->routeIs('hospitals_list')">
                         {{ __('Hospitals') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('hospitals_list')" :active="request()->routeIs('hospitals_list')">
+                    <x-nav-link :href="route('appointment.index')" class="text-dark" :active="request()->routeIs('appointment.index')">
+                        {{ __('Make and View Appointment Status') }}
+                    </x-nav-link>
+
+                    <x-nav-link :href="route('events')" class="text-dark" :active="request()->routeIs('events')">
                         {{ __('Events') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('aboutUs')" :active="request()->routeIs('aboutUs')">
+                    <x-nav-link :href="route('aboutUs')" class="text-dark" :active="request()->routeIs('aboutUs')">
                         {{ __('About Us') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('contactUs')" :active="request()->routeIs('contactUs')">
+                    <x-nav-link :href="route('contactUs')" class="text-dark" :active="request()->routeIs('contactUs')">
                         {{ __('Contact Us') }}
                     </x-nav-link>
+
 
                 </div>
             </div>
@@ -55,7 +61,7 @@
                     </x-slot>
 
                     <x-slot name="content">
-                        <x-dropdown-link >
+                        <x-dropdown-link :href="route('profile')" >
                                 {{ __('My Profile') }}
                         </x-dropdown-link>
 
@@ -101,7 +107,7 @@
             </div>
 
             <div class="mt-3 space-y-1">
-                <x-responsive-nav-link>
+                <x-responsive-nav-link :href="route('profile')">
                         {{ __('My Profile') }}
                 </x-responsive-nav-link>
                 
