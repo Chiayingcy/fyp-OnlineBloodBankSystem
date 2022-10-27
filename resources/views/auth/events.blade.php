@@ -1,5 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
+@php
+    use Illuminate\Support\Carbon;
+    
+@endphp
 
 <head>
     <meta charset="UTF-8">
@@ -95,16 +99,27 @@
                                     </td>
                                     <td colspan="3" class="align-center text-dark">
                                         @php
-                                            // dd($register_event, $event->id);
+                                            $diff = now()->diffInDays(Carbon::parse($event->eventDate));
                                         @endphp
 
                                         @if (in_array($event->id, $register_event))
-                                            <button type='button align-center' class='btn btn-success'>Already
-                                                Registered</button>
+                                            {{-- <button type='button align-center' class='btn btn-success'>Already
+                                                Registered</button> --}}
+
+                                            <button type='button align-center'
+                                                onclick="return confirm('Are you sure want to cancel this Registered?')"
+                                                class='btn btn-danger'><a
+                                                    href="{{ route('event.delete', $event->id) }}">Cancel This
+                                                    Registered</a></button>
                                         @else
-                                            <button type='button align-center' class='btn btn-primary'><a
-                                                    href="{{ route('eventregister', $event->id) }}">Register
-                                                    Events</a></button>
+                                            @if ($diff != 0)
+                                                <button type='button align-center' class='btn btn-primary'><a
+                                                        href="{{ route('event.register', $event->id) }}">Register
+                                                        Events</a></button>
+                                            @else
+                                                <button type='button align-center' class='btn btn-danger'>Events
+                                                    Registered Close</button>
+                                            @endif
                                         @endif
                                     </td>
 

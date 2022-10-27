@@ -39,6 +39,8 @@ use App\Http\Controllers\Admin\Auth\AdminViewHospitalsController;
 use App\Http\Controllers\Admin\Auth\AdminBloodRequestController;
 use App\Http\Controllers\Auth\DonorEventController;
 use App\Http\Controllers\Hospitals\Auth\BloodRequestController;
+use App\Http\Controllers\Hospitals\Auth\DonorAppointmentController;
+use App\Http\Controllers\Hospitals\Auth\DonorEventRegisterController;
 use App\Http\Controllers\Hospitals\Auth\EventController;
 use App\Http\Controllers\Hospitals\Auth\HospitalsDashboardController;
 use App\Http\Controllers\Hospitals\Auth\HospitalsEditDonorController;
@@ -154,9 +156,14 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('appointment', AppointmentController::class);
 
+    Route::get('/donate_event', [DonorEventController::class, 'donateList'])->name('donet.events');
+
     Route::get('/event', [DonorEventController::class, 'index'])->name('events');
 
-    Route::get('eventregister/{id}', [DonorEventController::class, 'eventregister'])->name('eventregister');
+    Route::get('eventregister/{id}', [DonorEventController::class, 'eventregister'])->name('event.register');
+
+
+    Route::get('/eventdelete/{id}', [DonorEventController::class, 'eventdelete'])->name('event.delete');
 
 });
 
@@ -233,9 +240,22 @@ Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
 
     Route::get('/viewBloodRequest', [BloodRequestController::class, 'viewBloodRequest'])->name('bloodRequest.index');
 
+    Route::get('editBloodRequest/{id}', [BloodRequestController::class, 'editBloodRequest'])->name('bloodRequest.edit');
+
+    Route::post('updateBloodRequest/{id}', [BloodRequestController::class, 'updateBloodRequest'])->name('bloodRequest.update');
+
     Route::get('/viewBloodRequest/delete/{id}', [BloodRequestController::class, 'destroy'])->name('bloodRequest.delete');
 
     Route::get('/viewDonorAppointment', [HospitalsDashboardController::class, 'viewDonorAppointment'])->middleware('Hospitals')->name('viewDonorAppointment');
+   // Route::resource('DonorAppointment', DonorAppointmentController::class);
+
+    Route::get('/DonorAppointment/{id?}', [DonorAppointmentController::class, 'edit'])
+    ->name('DonorAppointment.edit');
+
+    Route::put('/DonorAppointment/{id}', [DonorAppointmentController::class, 'update'])
+    ->name('DonorAppointment.update');
+
+    Route::get('/viewDonorRegisteredEvent', [DonorEventRegisterController::class, 'index'])->name('event.registered');
 });
 
 

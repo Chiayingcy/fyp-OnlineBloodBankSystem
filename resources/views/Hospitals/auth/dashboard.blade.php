@@ -78,6 +78,76 @@
         <br />
         <hr /><br />
 
+        <div class="col-md-12" id="chart_div">
+            <style>
+                .pie-chart {
+                    width: 100%;
+                    height: 400px;
+                    margin: 0 auto;
+                    float: right;
+                }
+
+                .text-center {
+                    text-align: center;
+                }
+
+                @media (max-width: 991px) {
+                    .pie-chart {
+                        width: 100%;
+                    }
+                }
+            </style>
+            <script src="{{ asset('vendor/loader.js') }}"></script>
+            <script src="{{ asset('vendor/jquery.min.js') }}"></script>
+            <script src="{{ asset('vendor/chart.min.js') }}"></script>
+            <script>
+                window.onload = function() {
+                    google.load("visualization", "1.1", {
+                        packages: ["corechart"],
+                        callback: 'drawAllChart'
+                    });
+                };
+
+                function drawAllChart() {
+                    drawChart();
+                }
+            </script>
+            <div class="row">
+
+                <div class="col-lg-12  mb-3">
+                    <div id="chartDiv" class="pie-chart"></div>
+                </div>
+
+                <div class="col-lg-12  mb-3">
+                    <div id="chartDivs" class="pie-chart"></div>
+                </div>
+
+                <script type="text/javascript">
+                    function drawChart() {
+                        var data = new google.visualization.DataTable();
+                        data.addColumn('string', 'Pizza');
+                        data.addColumn('number', 'Populartiy');
+                        data.addRows([
+                            @foreach ($options as $label => $count)
+                                ['{{ $label }}', {{ $count }}],
+                            @endforeach
+                        ]);
+                        var options = {
+                            title: "Total available blood according to blood groups",
+                            sliceVisibilityThreshold: .0,
+                        };
+
+                        var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
+                        chart.draw(data, options);
+
+                        var chart = new google.visualization.ColumnChart(document.getElementById('chartDivs'));
+                        chart.draw(data, options);
+                    }
+                </script>
+
+            </div>
+        </div>
+
 
         <h4>Emergency Blood Request Status</h4>
         <hr /><br />
@@ -89,7 +159,8 @@
                         {{ $EmergencyBloodPending }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -102,7 +173,8 @@
                         {{ $EmergencyBloodSuccess }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -115,7 +187,8 @@
                         {{ $EmergencyBloodFail }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -136,7 +209,8 @@
                         {{ $RequestBloodPending }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -149,7 +223,8 @@
                         {{ $RequestBloodSuccess }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -162,7 +237,8 @@
                         {{ $RequestBloodFail }}
                     </h3>
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.bloodRequest.index') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>
@@ -179,12 +255,13 @@
                 <div class="card bg-primary text-white mb-4">
                     <div class="card-body">Total Donors Appointment</div>
                     <h3 class="display-4" style="padding-left:42%">
-                        {{ $donorAppointment}}
+                        {{ $donorAppointment }}
                         <!--{{ $totalDonorAppoiment }}-->
                     </h3>
 
                     <div class="card-footer d-flex align-items-center justify-content-between">
-                        <a class="small text-white stretched-link" href="{{ route ('Hospitals.viewDonorAppointment') }}">View Details</a>
+                        <a class="small text-white stretched-link"
+                            href="{{ route('Hospitals.viewDonorAppointment') }}">View Details</a>
                         <div class="small text-white"><i class="fas fa-angle-right"></i></div>
                     </div>
                 </div>

@@ -82,6 +82,7 @@
             <x-auth-success-status class="mb-4" :status="session('message')" />
 
             <!--Display all hospitals from database in table format -->
+            <div class="table-responsive">
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
@@ -142,10 +143,15 @@
 
                     </td>
                     <td colspan="3" class="align-center text-dark">
-                        <button type='button align-center' class='btn btn-primary'><a href="editBloodRequest/{{ $bloodRequest->id }}">Edit</a></button>
-                        <br/><br/>
-                        <button type='button align-center' onclick="return confirm('Are you sure want to delete this blood request?')" class='btn btn-danger'>
-                            <a href="{{ route('Hospitals.bloodRequest.delete', $bloodRequest->id) }}">Delete</a></button>
+                        @if ($bloodRequest->bloodRequestStatus == 1)
+                            <span class="badge badge-success">Success</span>
+                        @else
+                            <button type='button align-center' class='btn btn-primary'><a href="{{route('Hospitals.bloodRequest.edit',$bloodRequest->id)}}">Edit</a></button>
+                            <br/><br/>
+                            <button type='button align-center' onclick="return confirm('Are you sure want to delete this blood request?')" class='btn btn-danger'>
+                                <a href="{{ route('Hospitals.bloodRequest.delete', $bloodRequest->id) }}">Delete</a></button>
+                            
+                        @endif
                     </td>
                     
                     </tr>
@@ -154,7 +160,8 @@
                     <li class="list-group-item list-group-item-danger">No Records of Blood Request Found!</li>
                  @endforelse
                 </tbody>
-            </table>  
+            </table> 
+            </div> 
             {{ $bloodRequests->links() }}
     </div>
 <br/>

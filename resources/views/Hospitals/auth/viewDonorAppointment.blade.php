@@ -80,6 +80,7 @@
             <x-auth-success-status class="mb-4" :status="session('message')" />
 
             <!--Display all hospitals from database in table format -->
+            <div class="table-responsive">
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
@@ -99,17 +100,14 @@
                 </thead>
 
                 <tbody>
-
+                
                 @if ($donorAppointment->count() == 0)
                     <tr>
                         <td colspan="35"><li class="list-group-item list-group-item-danger">There is no any donors make appointment yet!</li></td>
 
                     </tr>
                 @endif
-
                 @foreach($donorAppointment as $donorAppointment)
-
-                    @if($donorAppointment->appointmentStatus == 1)
                     <tr>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->id }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->name }}</td>
@@ -123,32 +121,31 @@
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->phoneNo }}</td>
                     
                         <td colspan="3" class="align-center text-dark">
-                            <button type='button align-center' class='btn btn-primary'><a href="editBloodRequest/{{ $donorAppointment->id }}">Record of Status Appointment</a></button>
-                            <br/><br/>
-                            <button type='button align-center' class='btn btn-danger'>
-                                <a href="{{ route('Hospitals.bloodRequest.delete', $donorAppointment->id) }}">Expired</a></button>
+                        {{--(date('Y-m-d H:i:s') == $donorAppointment->appointmentDate)--}}
+                            @if (date('Y-m-d') == $donorAppointment->appointmentDate)
+                                <button type='button align-center' class='btn btn-primary'><a href="{{ route('Hospitals.DonorAppointment.edit',$donorAppointment->appointmentId)}}">Record of Status Appointment</a></button>
+                                <br/><br/>
+
+                            @else
+                                @php
+                                
+                                    $updateStatus = app\Models\Appointment::find($donorAppointment->appointmentId);
+                                    $updateStatus->appointmentStatus = 2;
+                                    $updateStatus->save()
+                                @endphp
+                                <button type='button align-center' class='btn btn-danger'>Expired</a></button>
+                            @endif
                         </td>
-                        
                     </tr>
-
-                    @else
-                    <tr>
-                        <td colspan="35"><li class="list-group-item list-group-item-danger">There is no any donors make appointment yet!</li></td>
-
-                    </tr>
-                    
-                    @endif
-
                  @endforeach
                 </tbody>
-            </table>  
+            </table> 
+            </div> 
     </div>
 <br/>
-
 
 </div>
 </div>
 
 </body>    
 </html>
-

@@ -26,7 +26,12 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('appointment.index')" class="text-dark" :active="request()->routeIs('appointment.index')">
-                        {{ __('Make and View Appointment Status') }}
+                        {{ __('Make and Edit Appointment Status') }}
+                    </x-nav-link>
+
+                    
+                    <x-nav-link :href="route('donet.events')" class="text-dark" :active="request()->routeIs('donet.events')">
+                        {{ __('Record History of Donations') }}
                     </x-nav-link>
 
                     <x-nav-link :href="route('events')" class="text-dark" :active="request()->routeIs('events')">

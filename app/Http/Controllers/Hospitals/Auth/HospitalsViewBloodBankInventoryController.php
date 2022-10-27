@@ -73,10 +73,11 @@ class HospitalsViewBloodBankInventoryController extends Controller
     {
         $hospitals = HospitalsBloodBankInventory::find($id);
 
-        $hospitals->bloodQuantity = $request->input('bloodQuantity');
+        $addBlood = $hospitals->bloodQuantity + $request->input('bloodQuantity');
+        $hospitals->bloodQuantity = $addBlood;
 
-        $hospitals->update($request->all());
-        
+        $hospitals->save();
+
 
         return redirect()->route('Hospitals.viewBloodBankInventory')->with('message', 'Blood Type Quantity in Blood Bank Inventory updated successfully');
     }

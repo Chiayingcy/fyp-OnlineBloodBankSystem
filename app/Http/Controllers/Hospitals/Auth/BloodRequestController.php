@@ -79,4 +79,20 @@ class BloodRequestController extends Controller
         
         return redirect()->route('Hospitals.bloodRequest.index' , compact('bloodRequests'));
     }
+
+    public function editBloodRequest($id)
+    {
+        $bloodRequest = BloodRequest::with('bloodTypes', 'hospital')->find($id);
+
+        return view('Hospitals.auth.bloodRequest.edit', compact('bloodRequest'));
+    }
+
+    public function updateBloodRequest(Request $request, $id)
+    {
+        $bloodRequest = BloodRequest::find($id);
+        $bloodRequest->bloodQuantity = $request->bloodQuantity;
+        $bloodRequest->save();
+
+        return redirect()->route('Hospitals.bloodRequest.index')->with('message', __('Blood Request is Update successfully.'));
+    }
 }

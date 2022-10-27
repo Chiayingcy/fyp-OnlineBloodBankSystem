@@ -32,6 +32,38 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
 
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load("current", {packages:["corechart"]});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Blood Type', 'Quantity'],
+          ['A+',     7],
+          ['A-',      2],
+          ['B+',  2],
+          ['B-', 2],
+          ['AB+',    7],
+          ['AB-',    3],
+          ['O+',    7],
+          ['O-',    7],
+          
+            
+          
+        ]);
+
+        var options = {
+          title: 'Total Available Bloods on demand',
+          is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+        chart.draw(data, options);
+      }
+    </script>
+
+
 </head>
 
 <body>
@@ -75,8 +107,13 @@
         <h2>Admin Dashboard </h2>
 
         <br />
-        <hr /><br />
+        
 
+
+
+        <div id="piechart_3d" class="align-center mx-auto my-auto" style="width: 900px; height: 600px;"></div>
+
+        <hr /><br />
 
         <h4>Emergency Blood Request Status</h4>
         <hr /><br />
@@ -136,6 +173,54 @@
             </div>
         </div>
 
+        <hr/><br/>
+        <div class="row">
+            <div class="col-xl-4 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Total Donors Registered</div>
+                    <h3 class="display-4" style="padding-left:42%">
+                        {{ $totalDonorsRegistered }}
+                    </h3>
+
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ route ('Admin.dashbaord') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Total Hospitals Registered</div>
+                    <h3 class="display-4" style="padding-left:42%">
+                        {{ $totalHospitalsRegistered }}
+                    </h3>
+
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ route ('Admin.dashbaord') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xl-4 col-md-6">
+                <div class="card bg-primary text-white mb-4">
+                    <div class="card-body">Total Blood Received</div>
+                    <h3 class="display-4" style="padding-left:42%">
+                        {{ $totalBloodReceived }}
+                    </h3>
+
+                    <div class="card-footer d-flex align-items-center justify-content-between">
+                        <a class="small text-white stretched-link" href="{{ route ('Admin.dashbaord') }}">View Details</a>
+                        <div class="small text-white"><i class="fas fa-angle-right"></i></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+
+            
 
     </div>
     </div>

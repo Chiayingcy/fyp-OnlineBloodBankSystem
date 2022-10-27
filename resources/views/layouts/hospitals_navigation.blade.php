@@ -294,7 +294,11 @@ a.article, a.article:hover {
 
                         <li>
                             <a href="{{ route ('Hospitals.event.create') }}">Add Event</a>
-                        </li>                      
+                        </li>
+                        
+                        <li>
+                            <a href="{{ route ('Hospitals.event.registered') }}">View Donors Registered by Events List</a>
+                        </li>
                     </ul>
                 </li>
 

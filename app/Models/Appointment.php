@@ -24,9 +24,10 @@ class Appointment extends Model
         'userID',
         'hospitalId',
         'reason',
+        'id'
     ];
 
-    public $sortable = ['appointmentDate','appointmentTime'];
+    public $sortable = ['appointmentDate', 'appointmentTime'];
 
     public function appointment()
     {

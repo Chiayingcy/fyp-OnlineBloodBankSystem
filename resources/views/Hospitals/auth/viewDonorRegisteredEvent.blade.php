@@ -4,10 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hospitals Edit Update Blood Bank Inventory</title>
+    <title>Hospitals View Donor Registered Event Page</title>
 
     <!-- Bootstrap CSS CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <!-- Font Awesome JS -->
@@ -22,7 +21,7 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 </head>
-  
+
 <body>
 @include('layouts.hospitals_navigation')
 <!-- Page Content Holder -->
@@ -58,7 +57,7 @@
         </div>
     </nav>
 
-    <h2>Hospitals Edit Update Blood Bank Inventory </h2>
+    <h2>Register Donor by Event</h2>
     
     <br/><hr/><br/>
 
@@ -66,18 +65,7 @@
     <!-- Row start -->
     <div class="row align-items-center">
         <div class="py-12 w-100">
-
-            <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
-
-            <!--Search function -->
-            <div class="my-2 my-lg-0 float-right">
-            <form action="{{ route('Hospitals.searchDonorList') }}" method="GET" role="search">
-            <x-text-input id="search" name="search" placeholder="Search Donor" />
-                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Donor">
-                        <span class="fas fa-search">
-                </button>
-            </form>
-            </div>
+        </div>
             <br/>
 
         <!-- Success Message -->
@@ -85,36 +73,43 @@
                     
         <!-- Validation Errors -->
         <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        
+        <div class="table">
+        
+            <table class="table table-hover table-bordered mx-auto mt-4">
+                <thead>
+                    <tr>
+                        <th class="align-center bg-dark text-light">{{ __('No.') }}</th>
+                        <th class="align-center bg-dark text-light">{{ __('Donor Name') }}</th>
+                        <th class="align-center bg-dark text-light">{{ __('Event Name') }}</th>
+                        <th class="align-center bg-dark text-light">{{ __('Event Date') }}</th>
+                        <th class="align-center bg-dark text-light">{{ __('Event Time') }}</th>
+                    </tr>
+                </thead>
 
-        <form method="POST" class= "mt-4 border border-dark" action="{{ route('Hospitals.editUpdateViewBloodBankInventory.update',$hospitals->id) }}" >
+                <tbody>
 
-            @csrf
-            
-            @method('PUT')
+                    @if ($events->count() == 0)
+                        <li class="list-group-item list-group-item-danger">No Event Record Found!</li>
+                    @endif
+                    @foreach ($events as $No => $event)
+                    <tr>
+                        <td>{{$No+1}}</td>
+                        <td>{{$event->donor->name}}</td>
+                        <td>{{$event->event->eventName}}</td>
+                        <td>{{$event->event->eventDate}}</td>
+                        <td>{{$event->event->eventTime}}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
 
-            <!-- Hospital Name -->
-            <div class="form-group mt-4 mx-2">
-                <label for="hospitalName" :value="hospitalID">Hospital ID:</label>
-                <input type="text" class="form-control" id="hospitalID" name="hospitalID" value="{{ Auth::guard('Hospitals')->user()->id }}" readonly autofocus>
-            </div>
+            <br/>
 
-            <!-- Blood Type -->
-            <div class="form-group mt-4 mx-2">
-            <label for="bloodType" :value="__('Blood Type')" >Blood Type: </label>
-            <select class="form-control" id="bloodType"  name="bloodType" value="{{ $bloodType->bloodType }}" disabled="disabled" autofocus readonly>
-                <option selected disable value="{{ $bloodType->id }}" class="text-dark">{{ $bloodType->bloodType }}</option>
-            </select>
-            
-            </div>
+        </div>
 
-            <!-- Blood Quantity -->
-            <div class="form-group mt-4 mx-2">
-                <label for="bloodQuantity" :value="__('Blood Quantity')">Blood Quantity:</label>
-                <input type="number" class="form-control" id="bloodQuantity" name="bloodQuantity"  value="" required>
-            </div>
-
-                <button type="submit" class="btn btn-primary mt-4 mx-2 my-4 ">Update Blood Bank Inventory</button>
-        </form>
+    <span class="user-pagination" style="float: right;margin-right: 10%;">{{$events->links()}}</span>
+    
             
     </div>
 <br/>

@@ -80,23 +80,11 @@
         <!-- Row start -->
         <div class="row align-items-center">
             <div class="py-12 w-100">
-                <!--Search function -->
-                <div class="my-2 my-lg-0 float-right">
-                    {{-- <form action="{{ route('Admin.searchDonorList') }}" method="GET" role="search">
-                        <x-text-input id="search" name="search" placeholder="Search Donor" />
-                        <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Donor">
-                            <span class="fas fa-search">
-                        </button>
-                    </form> --}}
-                </div>
 
                 <!-- Success Message -->
                 <x-auth-success-status class="mb-4" :status="session('message')" />
 
                 <!--Display all hospitals from database in table format -->
-                @php
-                    // dd($bloodRequests);
-                @endphp
                 <table class="table table-hover table-bordered mx-auto mt-4">
                     <thead>
                         <tr>
