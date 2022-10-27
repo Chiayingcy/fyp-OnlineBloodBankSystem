@@ -63,31 +63,7 @@ class HospitalsDashboardController extends Controller
         } 
     
 
-
-
-
-        $h = HospitalsBloodBankInventory::join('blood_types', 'hospitals_blood_bank_inventories.bloodType', '=', 'blood_types.id')
-                                        ->get('*', 'blood_types.bloodType')->toArray();
-
-        foreach ($BloodType as $c) 
-        {
-            $options[$c->bloodType] = 0;
-        }
-
-        foreach($h as $hi)
-        {
-            $data[] = array(
-                'Blood Type' =>$BloodType->first(),
-                'Blood Quantity' => $hi->bloodQuantity
-            );
-        }
-
-
-
-
-
-
-        return view('Hospitals.auth.dashboard', compact('EmergencyBloodPending', 'totalDonorAppoiment', 'EmergencyBloodSuccess', 'EmergencyBloodFail', 'RequestBloodPending', 'RequestBloodSuccess', 'RequestBloodFail', 'donorAppointment', 'options', ['data' => $data]));
+        return view('Hospitals.auth.dashboard', compact('EmergencyBloodPending', 'totalDonorAppoiment', 'EmergencyBloodSuccess', 'EmergencyBloodFail', 'RequestBloodPending', 'RequestBloodSuccess', 'RequestBloodFail', 'donorAppointment', 'options',));
     }
 
     public function viewDonorAppointment()
