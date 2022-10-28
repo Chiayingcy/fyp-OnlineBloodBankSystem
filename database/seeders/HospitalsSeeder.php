@@ -25,7 +25,7 @@ class HospitalsSeeder extends Seeder
             //'hospitalID'    => 'H0001',
             'email'         => 'abc_hospitalPP@gmail.com',
             'hospitalLink'  => 'https://jknpenang.moh.gov.my/hpp/',
-            'phoneNo'       => '0123452654',
+            'phoneNo'       => '041234567',
             'address'       => '456, Lorong ABC',
             'zipCode'       => '11700',
             'stateID'       => '7',

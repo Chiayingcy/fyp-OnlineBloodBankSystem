@@ -102,7 +102,7 @@
             <!-- Identifiaction Number -->
             <div class="form-group mt-4 mx-2">
                 <label for="ic" :value="__('ic')">Identification Number:</label>
-                <input type="text" class="form-control" id="ic" name="ic" value="{{ $User->ic }}"  required readonly>
+                <input type="text" class="form-control" id="ic" name="ic" value="{{ base64_decode($User->ic) }}"  required readonly>
             </div>
 
             <!-- Age -->

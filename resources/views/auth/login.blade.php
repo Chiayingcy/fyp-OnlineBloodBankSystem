@@ -31,19 +31,19 @@
         <form method="POST" action="{{ route('login') }}">
             @csrf
 
-           <!-- Email Address
+            <!-- Email Address -->
             <div>
                 <x-input-label for="email" :value="__('Email')" />
 
-                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus />
-            </div> -->
+                <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="example@hotmail.com" required autofocus />
+            </div>
 
-            <!-- Identification Number -->
+            <!-- Identification Number
             <div class="mt-4">
                 <x-input-label for="ic" :value="__('Identifiaction Number (I.C. No.)')" />
 
                 <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" placeholder="I.C. Format: 010101010101 without any symbol" :value="old('ic')" required autofocus />
-            </div>
+            </div> -->
 
             <!-- Password -->
             <div class="mt-4">

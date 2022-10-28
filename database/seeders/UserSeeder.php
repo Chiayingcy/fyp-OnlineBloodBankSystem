@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
 
         User::create([
             'name'      => 'Donor',
-            'ic'        => '010101070123',
+            'ic'        => base64_encode('010101070123'),
             'age'       => '21',   
             'email'     => 'donor@gmail.com',
             'bloodType' => '5',

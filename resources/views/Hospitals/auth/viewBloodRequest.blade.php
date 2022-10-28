@@ -86,7 +86,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('id', 'ID')</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('bloodType', 'Blood Type')</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('bloodQuantity', 'Blood Quantity')</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('bloodRequestStatus', 'Blood Request Status')</th>
@@ -101,7 +100,6 @@
                 <tbody>
                 @forelse($bloodRequests as $bloodRequest)
                 <tr>
-                    <td colspan="3" class="align-center text-dark">{{ $bloodRequest->id }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $bloodRequest->bloodType }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $bloodRequest->bloodQuantity }}</td>
                     <td colspan="3" class="align-center text-dark">

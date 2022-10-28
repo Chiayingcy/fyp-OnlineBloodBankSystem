@@ -95,7 +95,7 @@
                 @forelse($User as $user)
                 <tr>
                     <td colspan="3" class="align-center text-dark">{{ $user->name }}</td>
-                    <td colspan="3" class="align-center text-dark">{{ $user->ic }}</td>
+                    <td colspan="3" class="align-center text-dark">{{ base64_decode($user->ic) }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $user->age }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $user->email }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $user->bloodType }}</td>

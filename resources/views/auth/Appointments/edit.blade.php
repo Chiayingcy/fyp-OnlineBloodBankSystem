@@ -65,10 +65,8 @@
 
                                 <!-- Validation Errors -->
                                 <x-auth-validation-errors class="mb-4" :errors="$errors" />
-                                @if (Session::has('message'))
-                                    <div class="text-lg bg-success  text-red-400 mb-4 p-2">{{ Session::get('message') }}
-                                    </div>
-                                @endif
+                                <x-auth-success-status class="mb-4" :status="session('message')" />
+                                
                                 <form method="post" action="{{ route('appointment.update', $Appointment->id) }}">
                                     @method('PUT')
                                     @csrf
@@ -81,11 +79,11 @@
                                                 <div class="mt-1">
                                                     {{-- <input type="hidden" name="appointment_id" value="{{}}" --}}
                                                     <input type="date" id="appointmentDate" name="appointmentDate"
-                                                        min="" max=""
+                                                        min="{{ $min_date }}" max=""
                                                         value="{{ $Appointment->appointmentDate }}"
                                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                                 </div>
-                                                <span class="text-xs">Please choose the Date between ???</span>
+                                                <span class="text-xs">Please choose the Date 2 days after . </span>
                                                 @error('res_date')
                                                     <div class="text-sm text-red-400">{{ $message }}</div>
                                                 @enderror
@@ -98,11 +96,11 @@
                                                 </label>
                                                 <div class="mt-1">
                                                     <input type="time" id="appointmentTime" name="appointmentTime"
-                                                        min="" max=""
+                                                        min="{{ $openingTime }}" max="{{ $closingTime }}"
                                                         value="{{ $Appointment->appointmentTime }}"
                                                         class="block w-full appearance-none bg-white border border-gray-400 rounded-md py-2 px-3 text-base leading-normal transition duration-150 ease-in-out sm:text-sm sm:leading-5" />
                                                 </div>
-                                                <span class="text-xs">Please choose the time between ????.</span>
+                                                <span class="text-xs">Please choose time in betweeen working hours 8am - 8pm .</span>
                                                 @error('res_time')
                                                     <div class="text-sm text-red-400">{{ $message }}</div>
                                                 @enderror
@@ -154,7 +152,7 @@
     <br /><br />
 
 
-    @include('layouts.footer')
+    
 </body>
 
 </html>

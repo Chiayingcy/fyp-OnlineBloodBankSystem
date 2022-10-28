@@ -43,7 +43,7 @@ return new class extends Migration
 
 
 
-            $table->integer('role')->default(1);
+            $table->unsignedBigInteger('role')->default(1);
 
             
            // $table->unsignedBigInteger('role')->default(1);

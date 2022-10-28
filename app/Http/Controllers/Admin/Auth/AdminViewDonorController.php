@@ -71,7 +71,7 @@ class AdminViewDonorController extends Controller
 
         $addDonor = User::create([
             'name' => $request->name,
-            'ic' => $request->ic,
+            'ic' => base64_encode($request->ic),
             'age' => $request->age,
             'email' => $request->email,
             'bloodType' => $request->bloodType,

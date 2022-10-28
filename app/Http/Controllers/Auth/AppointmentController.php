@@ -71,7 +71,7 @@ class AppointmentController extends Controller
 
             if ($months <= 3) 
             {
-                return redirect()->back()->with('message', __('Appointment donate again their blood after 3 months..'));
+                return redirect()->back()->with('message', __('Blood donation is only allowed again after 3 months...', ));
             }
         }
 
@@ -79,7 +79,7 @@ class AppointmentController extends Controller
         
         if ($Appointment) 
         {
-            return redirect()->back()->with('message', __('Appointment can donet again their same day.'));
+            return redirect()->back()->with('message', __('Appointment cannot make in same day.'));
         }
 
         Appointment::create(
@@ -106,7 +106,13 @@ class AppointmentController extends Controller
         $Appointment = Appointment::find($id);
         $hospital = Hospitals::all();
 
-        return view('auth.Appointments.edit', compact('Appointment', 'hospital'));
+        $min_date =Carbon::now()->addDays(2)->format('Y-m-d');
+
+        $openingTime = Carbon::createFromTime(8,0,0)->format('H:i:s');
+
+        $closingTime = Carbon::createFromTime(20,0,0)->format('H:i:s');
+
+        return view('auth.Appointments.edit', compact('Appointment', 'hospital', 'min_date', 'openingTime', 'closingTime'));
     }
 
     /**
@@ -128,10 +134,10 @@ class AppointmentController extends Controller
             $fromDate = Carbon::parse($request->appointmentDate);
             $months = $toDate->diffInMonths($fromDate);
 
-            if ($months <= 3 && !Appointment::where('userID', $user)->where('appointmentDate', $request->appointmentDate)->exists()) 
+            /*if ($months <= 3 && !Appointment::where('userID', $user)->where('appointmentDate', $request->appointmentDate)->exists()) 
             {
-                return redirect()->back()->with('message', __('Appointment donate again their blood after 3 months..'));
-            }
+                return redirect()->back()->with('message', __('Blood donation is only allowed again after 3 months...'));
+            }*/
         }
 
         $updateAppointment = Appointment::find($id);

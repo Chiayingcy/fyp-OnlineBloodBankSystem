@@ -45,7 +45,7 @@
                                 <div class="mt-4">
                                     <x-input-label for="ic" :value="__('Identification Number')" />
 
-                                    <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" value="{{ auth()->user()->ic }}" autofocus readonly/>
+                                    <x-text-input id="ic" class="block mt-1 w-full" type="number" name="ic" value="{{ base64_decode(auth()->user()->ic) }}" autofocus readonly/>
                                 </div>
 
                                 <!-- Age -->

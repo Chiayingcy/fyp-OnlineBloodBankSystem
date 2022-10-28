@@ -74,7 +74,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th colspan="3" class="text-center bg-dark text-light">Id</th>
                         <th colspan="3" class="text-center bg-dark text-light">Blood Type</th>
                         <th colspan="3" class="text-center bg-dark text-light">Blood Quantity</th>
                         <th colspan="3" class="text-center bg-dark text-light">Action</th>
@@ -85,7 +84,6 @@
                 <tbody>
                 @forelse($hospitals as $hospital)
                 <tr>
-                    <td colspan="3" class="text-center text-dark">{{ $hospital->id }}</td>
                     <td colspan="3" class="text-center text-dark">{{ $hospital->bloodType }}</td>
 
                     @if($hospital->bloodQuantity < 50)
