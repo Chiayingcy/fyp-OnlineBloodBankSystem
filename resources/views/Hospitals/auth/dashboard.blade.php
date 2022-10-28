@@ -1,3 +1,40 @@
+<style>
+    .pie-chart {
+        width: 100%;
+        height: 400px;
+        margin: 0 auto;
+        float: right;
+    }
+
+    .text-center {
+        text-align: center;
+    }
+
+    @media (max-width: 991px) {
+        .pie-chart {
+            width: 100%;
+        }
+    }
+</style>
+<script src="{{ asset('vendor/loader.js') }}"></script>
+<script src="{{ asset('vendor/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/chart.min.js') }}"></script>
+<script>
+    window.onload = function() {
+        google.load("visualization", "1.1", {
+            packages: ["corechart"],
+            callback: 'drawAllChart'
+        });
+    };
+
+    function drawAllChart() {
+        drawChart();
+    }
+</script>
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,8 +69,9 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
     </script>
 
+
 </head>
-<!--<h1> Hospitals Dashboard {{ Auth::guard('Hospitals')->user()->hospitalName }} </h1>-->
+
 
 <body>
     @include('layouts.hospitals_navigation')
@@ -79,71 +117,18 @@
         <hr /><br />
 
         <div class="col-md-12" id="chart_div">
-            <style>
-                .pie-chart {
-                    width: 100%;
-                    height: 400px;
-                    margin: 0 auto;
-                    float: right;
-                }
-
-                .text-center {
-                    text-align: center;
-                }
-
-                @media (max-width: 991px) {
-                    .pie-chart {
-                        width: 100%;
-                    }
-                }
-            </style>
-            <script src="{{ asset('vendor/loader.js') }}"></script>
-            <script src="{{ asset('vendor/jquery.min.js') }}"></script>
-            <script src="{{ asset('vendor/chart.min.js') }}"></script>
-            <script>
-                window.onload = function() {
-                    google.load("visualization", "1.1", {
-                        packages: ["corechart"],
-                        callback: 'drawAllChart'
-                    });
-                };
-
-                function drawAllChart() {
-                    drawChart();
-                }
-            </script>
+            
             <div class="row">
 
                 <div class="col-lg-12  mb-3">
                     <div id="chartDiv" class="pie-chart"></div>
                 </div>
 
-                <div class="col-lg-12  mb-3">
+                <!--<div class="col-lg-12  mb-3">
                     <div id="chartDivs" class="pie-chart"></div>
-                </div>
+                </div>-->
 
-                <script type="text/javascript">
-                    function drawChart() {
-                        var data = new google.visualization.DataTable();
-                        data.addColumn('string', 'Pizza');
-                        data.addColumn('number', 'Populartiy');
-                        data.addRows([
-                            @foreach ($options as $label => $count)
-                                ['{{ $label }}', {{ $count }}],
-                            @endforeach
-                        ]);
-                        var options = {
-                            title: "Total available blood according to blood groups",
-                            sliceVisibilityThreshold: .0,
-                        };
-
-                        var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
-                        chart.draw(data, options);
-
-                        var chart = new google.visualization.ColumnChart(document.getElementById('chartDivs'));
-                        chart.draw(data, options);
-                    }
-                </script>
+                
 
             </div>
         </div>
@@ -272,6 +257,37 @@
     </div>
     </div>
 
+
+
+    <br/><br/>
+    
+
+
 </body>
 
 </html>
+
+
+<script type="text/javascript">
+    function drawChart() {
+        var data = new google.visualization.DataTable();
+        data.addColumn('string', 'Pizza');
+        data.addColumn('number', 'Populartiy');
+        data.addRows([
+            @foreach ($bloodInventory as $label => $count)
+                ['{{ $label }}', {{ $count }}],
+            @endforeach
+        ]);
+        var options = {
+            title: "Total available Bloods according to blood groups in Blood Inventory",
+            sliceVisibilityThreshold: .0,
+            is3D: true,
+        };
+
+        var chart = new google.visualization.PieChart(document.getElementById('chartDiv'));
+        chart.draw(data, options);
+
+        var chart = new google.visualization.ColumnChart(document.getElementById('chartDivs'));
+        chart.draw(data, options);
+    }
+</script>

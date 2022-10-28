@@ -20,5 +20,10 @@ class BloodType extends Model
         return $this->belongsToMany(User::class, 'foreign_key', 'id');
     }
 
+    public function hospital()
+    {
+        return $this->hasMany(HospitalsBloodBankInventory::class, 'bloodType', 'id');
+    }
+
     
 }
