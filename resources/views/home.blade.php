@@ -35,14 +35,43 @@
 
 @include('layouts.out_navigation')
 @include('layouts.slider')
-   <!-- <a href="{{ route ('login') }}"> Donor Login </a>
-    <a href="{{ route ('Hospitals.login') }}"> Hospital Login </a>
-    <a href="{{ route ('Admin.login') }}"> Admin Login </a>-->
 
 <!-- Page Content -->
 <div class="container">
-    <h1 class="display-4">Welcome to Online Blood Bank System</h1>
+    <h1 class="display-4 ">Welcome to Online Blood Bank System</h1>
     <hr/><br/>
+
+    <!-- Row start -->
+    <div class="row">
+            <h2 class = "align-center text-danger mx-auto my-auto display-4">Emergency Request Blood Type from Hospitals</h2>
+            <table class="table table-hover table-bordered mx-auto my-auto mt-4">
+                <thead>
+                    <tr>
+                        <th class="align-center bg-danger text-light">Hospital Name</th>
+                        <th class="align-center bg-danger text-light">Blood Types</th>
+                        <th class="align-center bg-danger text-light">Blood Quantity</th>
+                        <th class="align-center bg-danger text-light">Status</th>
+                        
+                    </tr>
+                </thead>
+
+                <tbody>
+                @foreach($bloodRequests as $bloodRequest)
+                <tr>
+                    <td class="align-center text-dark">{{ $bloodRequest->hospitalName }}</td>
+                    <td class="align-center text-dark">{{ $bloodRequest->bloodType }}</td>
+                    <td class="align-center text-dark">{{ $bloodRequest->bloodQuantity }}</td>
+                    <td class="align-center text-dark">Emergency</td>
+                </tr>
+
+                @endforeach
+                </tbody>
+            </table>
+    </div>
+
+
+    <br/><hr/><br/><br/>
+
     <!-- Row start -->
     <div class="row">
         <div class="col-lg-4 mb-4">
@@ -73,6 +102,7 @@
     </div>
     <!-- end of row -->
 
+    <!-- row start-->
     <br/><br/><hr/>
     <div class="row justify-content-between">
         <div class="col-4 mx-auto my-auto">
@@ -85,8 +115,11 @@
             <button type="button align-center" class="btn btn-info"><a href="{{ route ('register') }}">Become a Donor</a></button> 
         </div>
     </div>
+    <!-- end of row -->
 
-    <br/><br/><hr/>
+    <br/><br/><hr/><br/>
+
+    <!-- row start-->
     <div class="row justify-content-between">
         <div class="col-md-6 text-center">
         <table class="table table-hover table-bordered">
@@ -159,6 +192,7 @@
             <h4 class =  "display-4 font-weight-bold text-danger text-md-center"> Blood Types </h4>
         </div>
     </div>
+    <!-- end of row -->
 
 
 </div>

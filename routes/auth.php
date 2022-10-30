@@ -38,6 +38,7 @@ use App\Http\Controllers\Admin\Auth\AdminViewEventController;
 use App\Http\Controllers\Admin\Auth\AdminViewHospitalsController;
 use App\Http\Controllers\Admin\Auth\AdminBloodRequestController;
 use App\Http\Controllers\Auth\DonorEventController;
+use App\Http\Controllers\Auth\HomeController;
 use App\Http\Controllers\Hospitals\Auth\BloodRequestController;
 use App\Http\Controllers\Hospitals\Auth\DonorAppointmentController;
 use App\Http\Controllers\Hospitals\Auth\DonorEventRegisterController;
@@ -60,6 +61,8 @@ Route::middleware('guest')->group(function () {
                 ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('/', [HomeController::class, 'viewBloodRequest']);
 
     Route::get('/auth/t&c', [TermsAndConditionsController::class, 'index'])
                 ->name('t&c');
@@ -126,6 +129,8 @@ Route::middleware('auth')->group(function () {
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 
+    Route::get('/home', [HomeController::class, 'dviewBloodRequest'])->name('d_home');
+
     Route::get('hospitals_list', [RegisteredHospitalsController::class, 'viewHospitals'])
                 ->name('hospitals_list');
 
@@ -156,7 +161,7 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('appointment', AppointmentController::class);
 
-    Route::get('/donate_event', [DonorEventController::class, 'donateList'])->name('donet.events');
+    Route::get('/donate_record', [AppointmentController::class, 'donateList'])->name('donet.events');
 
     Route::get('/event', [DonorEventController::class, 'index'])->name('events');
 
