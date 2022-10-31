@@ -84,7 +84,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th colspan="3" class="align-center bg-dark text-light">Id</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('name', 'Donor Name')</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('ic', 'Donor I.C.')</th>
                         <th colspan="3" class="align-center bg-dark text-light">@sortablelink('age', 'Donor Age.')</th>
@@ -100,7 +99,6 @@
                 <tbody>
                 @foreach($User as $user)
                 <tr>
-                    <td colspan="3" class="align-center text-dark">{{ $user->id }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $user->name }}</td>
                     <td colspan="3" class="align-center text-dark">{{ base64_decode($user->ic) }}</td>
                     <td colspan="3" class="align-center text-dark">{{ $user->age }}</td>

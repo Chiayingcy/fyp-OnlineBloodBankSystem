@@ -91,7 +91,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th class="align-center bg-dark text-light">{{ __('No.') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Event Name') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Event Date') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Event Time') }}</th>
@@ -110,12 +109,6 @@
                     @foreach ($events as $event)
 
                     <tr>
-                        <td>
-                            @if (!empty($event['id']))
-                            {{ $event['id'] }}
-                            @endif
-                        </td>
-                        
                         <td>
                             @if (!empty($event['eventName']))
                             {{ $event['eventName'] }}

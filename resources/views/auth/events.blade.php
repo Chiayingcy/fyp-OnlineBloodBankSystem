@@ -71,9 +71,9 @@
                     <table class="table table-hover table-bordered mx-auto">
                         <thead>
                             <tr>
-                                <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hospital Name')</th>
-                                <th colspan="3" class="align-center bg-dark text-light">@sortablelink('eventName', 'Event Name')</th>
-                                <th colspan="3" class="align-center bg-dark text-light">@sortablelink('eventDate', 'Event Date')</th>
+                                <th colspan="3" class="align-center bg-dark text-light">Hospital Name</th>
+                                <th colspan="3" class="align-center bg-dark text-light">Event Name</th>
+                                <th colspan="3" class="align-center bg-dark text-light">Event Date</th>
                                 <th colspan="3" class="align-center bg-dark text-light">Event Time</th>
                                 <th colspan="3" class="align-center bg-dark text-light">Image</th>
                                 <th colspan="3" class="align-center bg-dark text-light">Description</th>
@@ -98,13 +98,14 @@
                                     <td colspan="3" class="align-center text-dark">{{ $event->eventDescription }}
                                     </td>
                                     <td colspan="3" class="align-center text-dark">
+
                                         @php
-                                            $diff = now()->diffInDays(Carbon::parse($event->eventDate));
+
+                                            $today = date("Y-m-d");
+
                                         @endphp
 
                                         @if (in_array($event->id, $register_event))
-                                            {{-- <button type='button align-center' class='btn btn-success'>Already
-                                                Registered</button> --}}
 
                                             <button type='button align-center'
                                                 onclick="return confirm('Are you sure want to cancel this Registered?')"
@@ -112,10 +113,11 @@
                                                     href="{{ route('event.delete', $event->id) }}">Cancel This
                                                     Registered</a></button>
                                         @else
-                                            @if ($diff != 0)
+                                            @if($today < $event->eventDate)
                                                 <button type='button align-center' class='btn btn-primary'><a
                                                         href="{{ route('event.register', $event->id) }}">Register
                                                         Events</a></button>
+                                                        
                                             @else
                                                 <button type='button align-center' class='btn btn-danger'>Events
                                                     Registered Close</button>

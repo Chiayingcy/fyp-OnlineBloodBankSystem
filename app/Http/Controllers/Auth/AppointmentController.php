@@ -162,4 +162,16 @@ class AppointmentController extends Controller
         
         return to_route('appointment.index',compact('appointments'));
     }
+
+    public function donateList()
+    {
+
+        $user = auth()->user()->id;
+
+        $donetList = Appointment::with(["hospital"])->paginate();
+
+        $donetListnew = Appointment::where('userID',$user)->get();
+
+        return view('Auth.Appointments.donerlist', compact('donetList', 'donetListnew'));
+    }
 }

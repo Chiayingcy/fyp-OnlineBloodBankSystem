@@ -65,6 +65,16 @@
     <div class="row align-items-center">
         <div class="py-12 w-100">
 
+            <!--Search function -->
+            <div class="my-2 my-lg-0 float-right">
+            <form action="{{ route('Admin.viewSearchBloodBankInventory') }}" method="GET" role="search">
+            <x-text-input id="search" name="search" placeholder="Search Hospital" />
+                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Hospital">
+                        <span class="fas fa-search">
+                </button>
+            </form>
+            </div>
+
             <!-- Success Message -->
             <x-auth-success-status class="mb-4" :status="session('message')" />
 
@@ -72,7 +82,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th colspan="3" class="text-center bg-dark text-light">No.</th>
                         <th colspan="3" class="text-center bg-dark text-light">Hospital Name</th>
                         <th colspan="3" class="text-center bg-dark text-light">Blood Type</th>
                         <th colspan="3" class="text-center bg-dark text-light">Blood Quantity</th>
@@ -84,7 +93,6 @@
                 <tbody>
                 @forelse($hospitals as $hospital)
                 <tr>
-                    <td colspan="3" class="text-center text-dark">{{ $hospital->id }}</td>
                     <td colspan="3" class="text-center text-dark">{{ $hospital->hospitalName }}</td>
                     <td colspan="3" class="text-center text-dark">{{ $hospital->bloodType }}</td>
 

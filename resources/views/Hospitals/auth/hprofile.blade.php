@@ -6,8 +6,8 @@
 <style>
     .fa-eye{
   position: absolute;
-  margin-top: 2.2%;
-  margin-left: 75%;
+  margin-top: 2.8%;
+  margin-left: 70%;
   cursor: pointer;
   color: lightgray;
 }

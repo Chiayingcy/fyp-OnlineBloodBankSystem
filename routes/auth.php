@@ -332,6 +332,10 @@ Route::prefix('/Admin')->name('Admin.')->group(function (){
 
     Route::get('/viewBloodBankInventory', [AdminViewBloodBankInventoryController::class, 'viewBloodBankInventory'])->name('viewBloodBankInventory');
 
+    Route::get('/viewBloodBankInventory/search', [AdminViewBloodBankInventoryController::class, 'searchHospitals'])->name('viewSearchBloodBankInventory');
+
+
+
     Route::get('/bloodRequestAllList', [AdminBloodRequestController::class, 'index'])->name('bloodRequest.index');
 
     Route::get('/bloodRequestList/edit/{id}', [AdminBloodRequestController::class, 'edit'])->name('bloodRequest.edit');

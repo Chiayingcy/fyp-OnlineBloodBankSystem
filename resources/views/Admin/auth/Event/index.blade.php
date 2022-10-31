@@ -88,7 +88,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th class="align-center bg-dark text-light">@sortablelink('id', 'No.')</th>
                         <th class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hosted By')</th>
                         <th class="align-center bg-dark text-light">@sortablelink('eventName', 'Event Name')</th>
                         <th class="align-center bg-dark text-light">@sortablelink('eventDate', 'Event Date')</th>
@@ -101,12 +100,6 @@
                     @forelse($events as $event)
 
                     <tr>
-                        <td>
-                            @if (!empty($event['id']))
-                            {{ $event['id'] }}
-                            @endif
-                        </td>
-
                         <td>
                             @if (!empty($event['hospitalName']))
                             {{ $event['hospitalName'] }}

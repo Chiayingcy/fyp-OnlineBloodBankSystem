@@ -29,9 +29,11 @@ class AdminViewDonorController extends Controller
     {
         $searchDonor = $_GET['search'];
         
-        $User = User::where('name', 'LIKE', '%'.$searchDonor.'%')->paginate(5);
-        
-
+        $User = User::where('name', 'LIKE', '%'.$searchDonor.'%')
+                    ->join('blood_types', 'users.bloodType', '=', 'blood_types.id')
+                    ->select('users.id','users.name', 'users.ic', 'users.age', 'users.email','blood_types.bloodType','users.gender', 'users.phoneNo',)
+                    ->sortable()
+                    ->paginate(5);
 
         return view('Admin.auth.searchDonor', compact('User'));
     }

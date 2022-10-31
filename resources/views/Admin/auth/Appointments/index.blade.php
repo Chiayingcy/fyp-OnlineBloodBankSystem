@@ -91,7 +91,6 @@
                 <table class="table table-hover table-bordered mx-auto mt-4">
                     <thead>
                         <tr>
-                            <th colspan="3" class="align-center bg-dark text-light">Id</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hospital Name')</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('donor', 'Donor')</th>
                             <th colspan="3" class="align-center bg-dark text-light">@sortablelink('appointmentDate', 'Donor Appointment Date')</th>
@@ -102,12 +101,8 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($appointment as $appo)
+                        @forelse ($appointment as $appo)
                             <tr>
-                                <td colspan="3" class="align-center text-dark">
-                                    {{ $appo->id }}
-                                </td>
-
                                 <td colspan="3" class="align-center text-dark">
                                     {{ $appo->hospital->hospitalName }}
                                 </td>
@@ -145,7 +140,10 @@
                                 </td>
 
                             </tr>
-                        @endforeach
+                            @empty
+                            <li class="list-group-item list-group-item-danger">There is no any donors make appointment yet!</li>
+                
+                        @endforelse
                     </tbody>
                 </table>
                 {{ $appointment->links() }}

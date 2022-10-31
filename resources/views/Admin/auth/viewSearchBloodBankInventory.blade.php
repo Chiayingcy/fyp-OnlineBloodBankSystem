@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin View Event Page</title>
+    <title>Admin View Search Blood Bank Inventory</title>
 
     <!-- Bootstrap CSS CDN -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
@@ -57,102 +57,69 @@
         </div>
     </nav>
 
-    <h2>Admin View All Event List which hosted by Hospitals </h2>
+    <h2>Admin View Search Hospitals Blood Bank Inventory </h2>
     
     <br/><hr/><br/>
 
-    
     <!-- Row start -->
     <div class="row align-items-center">
         <div class="py-12 w-100">
 
+        <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
+
             <!--Search function -->
             <div class="my-2 my-lg-0 float-right">
-            <form action="{{ route('Admin.searchEvent') }}" method="GET" role="search">
-            <x-text-input id="search" name="search" placeholder="Search Event" />
-                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Event">
+            <form action="{{ route('Admin.viewSearchBloodBankInventory') }}" method="GET" role="search">
+            <x-text-input id="search" name="search" placeholder="Search Hospital" />
+                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Hospital">
                         <span class="fas fa-search">
                 </button>
             </form>
             </div>
-            <br/>
 
-        <!-- Success Message -->
-        <x-auth-success-status class="mb-4" :status="session('message')" />
-                    
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
-        
-        <div class="table">
-        
-            <table class="table table-hover table-bordered mx-auto">
+            <!-- Success Message -->
+            <x-auth-success-status class="mb-4" :status="session('message')" />
+
+            <!--Display all hospitals from database in table format -->
+            <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hosted By')</th>
-                        <th class="align-center bg-dark text-light">@sortablelink('eventName', 'Event Name')</th>
-                        <th class="align-center bg-dark text-light">@sortablelink('eventDate', 'Event Date')</th>
-                        <th class="align-center bg-dark text-light">@sortablelink('eventTime', 'Event Time')</th>
-                        <th class="align-center bg-dark text-light">{{ __('Event Poster') }}</th>
-                        <th class="align-center bg-dark text-light">{{ __('Event Description') }}</th>
+                        <th colspan="3" class="text-center bg-dark text-light">Hospital Name</th>
+                        <th colspan="3" class="text-center bg-dark text-light">Blood Type</th>
+                        <th colspan="3" class="text-center bg-dark text-light">Blood Quantity</th>
+                        <th colspan="3" class="text-center bg-dark text-light">Action</th>
+                        
                     </tr>
                 </thead>
+
                 <tbody>
-                    @forelse ($events as $event)
+                @forelse($hospitals as $hospital)
+                <tr>
+                    <td colspan="3" class="text-center text-dark">{{ $hospital->hospitalName }}</td>
+                    <td colspan="3" class="text-center text-dark">{{ $hospital->bloodType }}</td>
 
-                    <tr>
-                        <td>
-                            @if (!empty($event['hospitalName']))
-                            {{ $event['hospitalName'] }}
-                            @endif
-                        </td>
-                        
-                        <td>
-                            @if (!empty($event['eventName']))
-                            {{ $event['eventName'] }}
-                            @endif
-                        </td>
+                    @if($hospital->bloodQuantity < 50)
+                    <td colspan="3" class="text-center text-danger"><li class="list-group-item list-group-item-danger">{{ $hospital->bloodQuantity }}</li>
+                
+                        <br/><span class="badge badge-danger">Please send additional stock of Blood Type {{ $hospital->bloodType }} to this {{ $hospital->hospitalName }}</span>
+                    </td>
 
-                        <td>
-                            @if (!empty($event['eventDate']))
-                            {{ $event['eventDate'] }}
-                            @endif
-                        </td>
+                    @elseif($hospital->bloodQuantity >= 50)
+                    <td colspan="3" class="text-center text-success"><li class="list-group-item list-group-item-success">{{ $hospital->bloodQuantity }}</li></td>
 
-                        <td>
-                            @if (!empty($event['eventTime']))
-                            {{ $event['eventTime'] }}
-                            @endif
-                        </td>
+                    @endif
 
-                        <td>
-                            @if(!empty($event['image']))
-                            <img src="{{asset('eventImage')}}/{{$event->image}}" alt="Image" height="250" width="250"/>
-                            
-                            @endif
-                        </td>
+                    <td colspan="3" class="text-center text-dark"><a type='button align-center' class='btn btn-primary' href="{{ route ('Admin.bloodRequest', $hospital->id) }}">Send Blood</a> </td>
+                    
+                </tr>
 
-                        <td>
-                            @if(!empty($event['eventDescription']))
-                            {{ $event['eventDescription'] }}
-                            @endif
-                        </td>
-                       
-                    </tr>
-                    @empty
-                        <li class="list-group-item list-group-item-danger">Event Not Found.</li>
-                    @endforelse
+                @empty
+                    <li class="list-group-item list-group-item-danger">No Record Found!</li>
 
+
+                 @endforelse
                 </tbody>
-
-            </table>
-
-            <br/>
-
-        </div>
-
-    {{-- <span class="user-pagination" style="float: right;margin-right: 10%;">{{$client->links()}}</span> --}}
-    
-            
+            </table>   
     </div>
 <br/>
 
