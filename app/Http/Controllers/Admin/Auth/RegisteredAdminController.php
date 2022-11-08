@@ -59,7 +59,7 @@ class RegisteredAdminController extends Controller
 
         event(new Registered($admin));
 
-        Auth::guard('admin')->login($admin);
+        Auth::guard('Admin')->login($admin);
 
         return redirect(RouteServiceProvider::ADMIN_HOME);
     }

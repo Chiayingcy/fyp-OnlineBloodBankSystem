@@ -13,7 +13,7 @@
 </style>
 
 <x-guest-layout>
-<section class="bg-image" style="background-image: url('/Images/background1.png');">
+<section class="bg-image" style="background-image: url('/Images/background3.png');">
 
     <div class ="col-4 justify-content-center ">
     <x-auth-card>

@@ -25,11 +25,19 @@ class AdminDashboardController extends Controller
         $RequestBloodPending = BloodRequest::where('bloodRequirement', 0)->where('bloodRequestStatus', 0)->count();
         $donorAppoimentPending = Appointment::where('appointmentStatus', 0)->count();
 
+        $EmergencyBloodSuccess  = BloodRequest::where('bloodRequirement', 1)->where('bloodRequestStatus', 1)->count();
+        $RequestBloodSuccess = BloodRequest::where('bloodRequirement', 0)->where('bloodRequestStatus', 1)->count();
+        $donorAppoimentSuccess = Appointment::where('appointmentStatus', 1)->count();
+
         $totalDonorsRegistered = User::count();
         $totalHospitalsRegistered = Hospitals::count();
         $totalBloodReceived = Appointment::where('appointmentStatus', 1)->count();
 
+        $bloodInventory = BloodType::whereHas('hospital')->withSum('hospital', 'bloodQuantity')->get()->pluck('hospital_sum_blood_quantity', 'bloodType');
+        $BloodType = BloodType::all();
 
-        return view('Admin.auth.dashboard', compact('EmergencyBloodPending', 'RequestBloodPending', 'donorAppoimentPending', 'totalDonorsRegistered', 'totalHospitalsRegistered', 'totalBloodReceived'));
+
+        return view('Admin.auth.dashboard', compact('EmergencyBloodPending', 'RequestBloodPending', 'donorAppoimentPending', 'totalDonorsRegistered', 'totalHospitalsRegistered', 'totalBloodReceived', 'bloodInventory', 'EmergencyBloodSuccess', 'RequestBloodSuccess', 'donorAppoimentSuccess'));
     }
+
 }
