@@ -26,7 +26,7 @@
                     </x-nav-link>
 
                     <x-nav-link :href="route('appointment.index')" class="text-dark" :active="request()->routeIs('appointment.index')">
-                        {{ __('Make and Edit Appointment Status') }}
+                        {{ __('Make and Edit Appointment') }}
                     </x-nav-link>
 
                     

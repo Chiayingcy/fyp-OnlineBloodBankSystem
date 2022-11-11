@@ -53,7 +53,6 @@ class RegisteredAdminController extends Controller
             'adminName' => $request->adminName,
             'adminID' => $request->adminID,
             'email' => $request->email,
-           // 'role' => $request->role,
             'password' => Hash::make($request->password),
         ]);
 

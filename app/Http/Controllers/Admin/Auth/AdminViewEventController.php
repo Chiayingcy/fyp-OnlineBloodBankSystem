@@ -25,7 +25,10 @@ class AdminViewEventController extends Controller
     {
         $searchEvent = $_GET['search'];
 
-        $events = Events::where('eventName', 'LIKE', '%'.$searchEvent.'%')->paginate(5);
+        $events = Events::join('hospitals', 'events.hospitalID', '=', 'hospitals.id')
+                ->where('eventName', 'LIKE', '%'.$searchEvent.'%')
+                ->select('events.id','hospitals.hospitalName' ,'events.eventName', 'events.eventDate', 'events.eventTime', 'events.eventDescription', 'events.image', )
+                ->paginate(5);
         
         return view('Admin.auth.Event.searchEvent', compact('events'));
     

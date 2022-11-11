@@ -252,7 +252,6 @@ Route::prefix('/Hospitals')->name('Hospitals.')->group(function (){
     Route::get('/viewBloodRequest/delete/{id}', [BloodRequestController::class, 'destroy'])->name('bloodRequest.delete');
 
     Route::get('/viewDonorAppointment', [HospitalsDashboardController::class, 'viewDonorAppointment'])->middleware('Hospitals')->name('viewDonorAppointment');
-   // Route::resource('DonorAppointment', DonorAppointmentController::class);
 
     Route::get('/DonorAppointment/{id?}', [DonorAppointmentController::class, 'edit'])
     ->name('DonorAppointment.edit');
@@ -302,6 +301,12 @@ Route::prefix('/Admin')->name('Admin.')->group(function (){
 
     Route::put('/UpdateEditViewDonor/{id}', [AdminViewDonorController::class, 'editUpdateDonorInformation'])
     ->name('editDonor.update');
+
+    Route::get('/editHospitals/{id?}', [AdminViewHospitalsController::class, 'editViewHospital'])
+    ->name('editHospital');
+
+    Route::put('/UpdateEditViewospitals/{id}', [AdminViewHospitalsController::class, 'editUpdateHospitalInformation'])
+    ->name('editHospital.update');
 
     Route::get('/AppointmentsDonor', [AdminViewDonorController::class, 'AppointmentsDonor'])
         ->name('AppointmentsDonor');

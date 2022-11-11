@@ -1,12 +1,14 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin View Hospitals List</title>
+    <title>Admin Edit Hospital Information Page</title>
 
     <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 
     <!-- Font Awesome JS -->
@@ -57,62 +59,88 @@
         </div>
     </nav>
 
-    <h2>Admin View Hospitals List </h2>
+    <h2>Admin Edit Hospital Information </h2>
     
     <br/><hr/><br/>
 
+    
     <!-- Row start -->
     <div class="row align-items-center">
         <div class="py-12 w-100">
 
-        <a href="{{ route ('Admin.addHospital.create') }}" class="btn btn-primary col-sm-2">Add New Hospital</a>
+        <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
 
             <!--Search function -->
             <div class="my-2 my-lg-0 float-right">
-            <form action="{{ route('Admin.searchHospitalsList') }}" method="GET" role="search">
-            <x-text-input id="search" name="search" placeholder="Search Hospital" />
-                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Hospital">
+            <form action="{{ route('Admin.searchDonorList') }}" method="GET" role="search">
+            <x-text-input id="search" name="search" placeholder="Search Donor" />
+                <button class="btn btn-dark my-2 my-sm-0" type="submit" title="Search Donor">
                         <span class="fas fa-search">
                 </button>
             </form>
             </div>
+            <br/>
 
-            <!-- Success Message -->
-            <x-auth-success-status class="mb-4" :status="session('message')" />
-
-            <!--Display all hospitals from database in table format -->
-            <table class="table table-hover table-bordered mx-auto mt-4">
-                <thead>
-                    <tr>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalName', 'Hospital Name')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('email', 'Hospital Email')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('hospitalLink', 'Hospital Link.')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('phoneNo', 'Hospital Contact Number')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('address', 'Hospital Address')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">@sortablelink('zipCode', 'Hospital Zip Code')</th>
-                        <th colspan="3" class="align-center bg-dark text-light">Edit Information Details</th>
-                        
-                    </tr>
-                </thead>
-
-                <tbody>
-                @foreach($Hospitals as $hospital)
-                <tr>
-                    <td colspan="3" class="align-center text-dark">{{ $hospital->hospitalName }}</td>
-                    <td colspan="3" class="align-center text-dark">{{ $hospital->email }}</td>
-                    <td colspan="3" class="align-center text-dark"><button type='button align-center' class='btn btn-primary'><a href= "{{ $hospital->hospitalLink }}">See Details</a></button></td>
-                    <td colspan="3" class="align-center text-dark">{{ $hospital->phoneNo }}</td>
-                    <td colspan="3" class="align-center text-dark">{{ $hospital->address }}</td>
-                    <td colspan="3" class="align-center text-dark">{{ $hospital->zipCode }}</td>
-                    <td colspan="3" class="align-center text-dark"><button type='button align-center' class='btn btn-primary'><a href="editHospitals/{{ $hospital->id }}">Edit Information Details</a></button> </td>
+        <!-- Success Message -->
+        <x-auth-success-status class="mb-4" :status="session('message')" />
                     
-                    </tr>
+        <!-- Validation Errors -->
+        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+
+        <form method="POST" class= "mt-4 border border-dark" action="{{ route('Admin.editHospital.update',$Hospitals->id) }}" >
+
+        @csrf
+        @method('PUT')
+
+            <!-- Name -->
+            <div class="form-group mt-4 mx-2">
+                <label for="name" :value="__('Name')">Hospital Name:</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ $Hospitals->hospitalName }}"  autofocus readonly>
+            </div>
+
+            <!-- Email Address -->
+            <div class="form-group mt-4 mx-2">
+                <label for="email" :value="__('email')">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" value="{{ $Hospitals->email }}"  required>
+            </div>
+
+            <!-- Hospital Website Link -->
+            <div class="form-group mt-4 mx-2">
+                <label for="hospitalLink" value="{{ $Hospitals->bloodType }}"  > Hospital Website Link: </label>
+                <input type="text" class="form-control" id="hospitalLink" name="hospitalLink" value="{{ $Hospitals->hospitalLink }}"  required readonly>
+            </div>
+
+            <!-- Contact Number -->
+            <div class="form-group mt-4 mx-2">
+                <x-input-label for="phoneNo" :value="__('Contact Number')" />
+                <x-text-input id="phoneNo" class="form-control" type="tel" name="phoneNo" value="{{ $Hospitals->phoneNo }}"  required />
+            </div>
+
+            <!-- Address -->
+            <div class="form-group mt-4 mx-2">
+                <x-input-label for="address" :value="__('Address')" />
+                <x-text-input id="address" class="form-control" type="text" name="address" value="{{ $Hospitals->address }}" required />
+            </div>
+
+            <!-- Zip Code -->
+            <div class="form-group mt-4 mx-2">
+                <x-input-label for="zipCode" :value="__('Zip Code')" />
+                <x-text-input id="zipCode" class="form-control" type="number" name="zipCode" min="10000" max="99999" value="{{ $Hospitals->zipCode }}" required />
+            </div>
 
 
-                 @endforeach
-                </tbody>
-            </table>  
-            {{ $Hospitals->links() }} 
+             <!-- State -->
+             <div class = "form-group mt-4 mx-2">
+                <x-input-label for="stateID" :value="__('State')" />
+                    <select id="stateID" class="form-control" name="stateID" required>
+                        <option selected value="{{ $stateName->stateID }}">{{ $stateName->stateName }}</option>
+                    </select>
+            </div>
+
+            <button type="submit" class="btn btn-primary mt-4 mx-2 my-4 ">Update Hospital Information</button>
+
+        </form>
+            
     </div>
 <br/>
 
@@ -122,4 +150,3 @@
 
 </body>    
 </html>
-

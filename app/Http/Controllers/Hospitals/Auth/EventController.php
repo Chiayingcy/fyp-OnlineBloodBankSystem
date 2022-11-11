@@ -31,10 +31,6 @@ class EventController extends Controller
 
         $eventDate = Carbon::now()->addDays(7)->format('Y-m-d');
 
-        //$eventTime =  Carbon::now()->between(['08:00:00', $this->openingTime],['20:00:00', $this->closingTime]);
-
-        //$eventTime = Carbon::now();
-
         $openingTime = Carbon::createFromTime(8,0,0)->format('H:i:s');
 
         $closingTime = Carbon::createFromTime(20,0,0)->format('H:i:s');
@@ -133,8 +129,6 @@ class EventController extends Controller
         }
 
         $event->save();
-        //$event->image = $request->input($fileName);
-        //$event->update($request->all());
 
         return redirect()->route('Hospitals.event', compact('event'))->with('message', 'Event Information updated successfully');
     }

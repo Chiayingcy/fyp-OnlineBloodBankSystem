@@ -111,7 +111,7 @@
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->name }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->appointmentDate }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->appointmentTime }}</td>
-                        <td colspan="3" class="align-center text-dark">{{ $donorAppointment->ic }}</td>
+                        <td colspan="3" class="align-center text-dark">{{ base64_decode($donorAppointment->ic) }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->age }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->email }}</td>
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->bloodType }}</td>
@@ -119,10 +119,13 @@
                         <td colspan="3" class="align-center text-dark">{{ $donorAppointment->phoneNo }}</td>
                     
                         <td colspan="3" class="align-center text-dark">
-                        {{--(date('Y-m-d H:i:s') == $donorAppointment->appointmentDate)--}}
                             @if (date('Y-m-d') == $donorAppointment->appointmentDate)
                                 <button type='button align-center' class='btn btn-primary'><a href="{{ route('Hospitals.DonorAppointment.edit',$donorAppointment->appointmentId)}}">Record of Status Appointment</a></button>
                                 <br/><br/>
+                            
+                            @elseif (date('Y-m-d') < $donorAppointment->appointmentDate)
+                            <button type='button align-center' class='btn btn-warning'>Wait</button>
+                            <br/><br/>
 
                             @else
                                 @php

@@ -75,4 +75,33 @@ class AdminViewHospitalsController extends Controller
 
         return redirect()->route('Admin.addHospital.create' ,compact('States', 'addHospital'))->with('message', 'New Hospital Added Successfully!');
     }
+
+    public function editViewHospital($id)
+    {
+        $Hospitals = Hospitals::find($id);
+
+        $States = State::all();
+
+        $stateName = State::find($Hospitals->stateID);
+
+
+
+        return view('Admin.auth.editHospitals', compact('Hospitals', 'States', 'stateName'))->with('Hospitals', $Hospitals);
+    }
+
+    public function editUpdateHospitalInformation(Request $request, $id)
+    {
+        $Hospitals = Hospitals::find($id);
+
+        $Hospitals->email = $request->input('email');
+        $Hospitals->phoneNo = $request->input('phoneNo');
+        $Hospitals->address = $request->input('address');
+        $Hospitals->zipCode = $request->input('zipCode');
+        $Hospitals->stateID = $request->input('stateID');
+
+        $Hospitals->update($request->all());
+        
+
+        return redirect()->route('Admin.viewHospitalsList')->with('message', 'Hospital Information updated successfully');
+    }
 }

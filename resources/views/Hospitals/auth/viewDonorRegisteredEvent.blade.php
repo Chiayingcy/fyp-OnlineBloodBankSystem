@@ -79,7 +79,6 @@
             <table class="table table-hover table-bordered mx-auto mt-4">
                 <thead>
                     <tr>
-                        <th class="align-center bg-dark text-light">{{ __('No.') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Donor Name') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Event Name') }}</th>
                         <th class="align-center bg-dark text-light">{{ __('Event Date') }}</th>
@@ -90,11 +89,10 @@
                 <tbody>
 
                     @if ($events->count() == 0)
-                        <li class="list-group-item list-group-item-danger">No Event Record Found!</li>
+                        <li class="list-group-item list-group-item-danger">Event Registration of donor not found!</li>
                     @endif
                     @foreach ($events as $No => $event)
                     <tr>
-                        <td>{{$No+1}}</td>
                         <td>{{$event->donor->name}}</td>
                         <td>{{$event->event->eventName}}</td>
                         <td>{{$event->event->eventDate}}</td>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Hospitals\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\UpdateDonorInformationRequest;
+use App\Models\BloodType;
 use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -18,9 +19,9 @@ class HospitalsEditDonorController extends Controller
 
         $stateName = State::find($User->stateID);
 
+        $bloodType = BloodType::find($User->bloodType);
 
-
-        return view('Hospitals.auth.editDonor', compact('User', 'States', 'stateName'))->with('User', $User);
+        return view('Hospitals.auth.editDonor', compact('User', 'States', 'stateName', 'bloodType'))->with('User', $User);
     }
 
     public function editUpdateDonorInformation(UpdateDonorInformationRequest $request, $id)

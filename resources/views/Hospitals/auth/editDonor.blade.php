@@ -120,7 +120,7 @@
             <!-- Blood Type -->
             <div class="form-group mt-4 mx-2">
                 <label for="bloodType" value="{{ $User->bloodType }}"  >Blood Type: </label>
-                <input type="text" class="form-control" id="bloodType" name="bloodType" value="{{ $User->bloodType }}"  required readonly>
+                <input type="text" class="form-control" id="bloodType" name="bloodType" value="{{ $bloodType->bloodType }}"  required readonly>
             </div>
 
             <!-- Gender -->

@@ -65,9 +65,6 @@ class RegisteredUserController extends Controller
 
         $user = User::create([
             'name' => $request->name,
-            //'ic' => substr_replace($request->ic, 'xxxxxx', 3, 8),
-            //'ic' => Crypt::encrypt($request->ic),
-            //'ic' => $request->ic,
             'ic' => base64_encode($request->ic),
             'age' => $request->age,
             'email' => $request->email,
@@ -84,7 +81,7 @@ class RegisteredUserController extends Controller
 
         Auth::login($user);
 
-        return redirect(RouteServiceProvider::HOME);
+        return redirect(RouteServiceProvider::HOME)->with('message', __('Registration successful'));
     }
 
 

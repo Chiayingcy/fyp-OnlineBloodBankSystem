@@ -39,6 +39,7 @@
 
 </head>
 
+
   
 <x-app-layout>
     <x-slot name="header">
@@ -51,7 +52,7 @@
         <div class="max-w-7xl mx-auto sm:px-8 lg:px-15">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200 px-4">
-                    
+                <x-auth-success-status class="mb-4" :status="session('message')" />
                         <div class="row">
                             <div class="col-xl-3 col-md-6">
                                 <div class="card bg-primary text-white mb-4">
