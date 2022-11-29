@@ -139,11 +139,24 @@
                             {{ $event['eventDescription'] }}
                             @endif
                         </td>
+
                         <td>
+                        @php
+
+                            $today = date("Y-m-d");
+
+                        @endphp
+
+                        @if($today > $event->eventDate)
+                            <button class='btn btn-danger'>Expired</button>
+
+                        @else
                             <a href="{{ route('Hospitals.event.edit',$event->id) }}" class="btn btn-primary col-md">Edit</a><br><br>
 
                             <button type='button align-center' onclick="return confirm('Are you sure want to delete this event?')" class='btn btn-danger'>
                             <a href="{{ route('Hospitals.event.delete',$event->id) }}" class="btn btn-danger col-md">Delete</a></button>
+                        
+                        @endif
                         </td>
                     </tr>
                     @endforeach

@@ -79,6 +79,8 @@
     <div class="row align-items-center">
         <div class="py-12 w-100">
 
+        <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
+        
             <!--Search function -->
             <div class="my-2 my-lg-0 float-right">
             <form action="{{ route('Admin.searchHospitalsList') }}" method="GET" role="search">

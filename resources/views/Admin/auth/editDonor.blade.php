@@ -148,7 +148,7 @@
 
 
              <!-- State -->
-             <div class = "mt-4">
+             <div class = "form-group mt-4 mx-2">
                 <x-input-label for="stateID" :value="__('State')" />
                    <select id="stateID" class="form-control" name="stateID" required>
                         <option selected value="{{ $stateName->stateID }}">{{ $stateName->stateName }}</option>

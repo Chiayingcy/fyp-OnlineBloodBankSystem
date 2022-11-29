@@ -53,14 +53,14 @@ class HospitalsViewDonorController extends Controller
 
         $request->validate([
             'name' => 'required|min:0|max:255|',
-            'ic' => 'required|min:0|max:12|unique:users',
+            'ic' => 'required|size:12|unique:users',
             'age' => 'required|min:2|max:5|',
             'email' => 'required|email|unique:users',
             'bloodType' => 'required',
             'gender' => 'required|min:4|max:255|',
             'phoneNo' => 'required|numeric|min:10|regex:/^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
             'address' => 'required|min:5|max:255|',
-            'zipCode' => 'required|min:0|max:5|',
+            'zipCode' => 'required|size:5|max:5|',
             'stateID' => 'required|',
             'password' => ['required', 'confirmed', 
                             Rules\Password::min(8)->letters()->numbers()->mixedCase()->symbols()

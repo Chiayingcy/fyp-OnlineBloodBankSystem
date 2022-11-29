@@ -47,7 +47,7 @@ class AdminViewHospitalsController extends Controller
             'hospitalName' => 'required|min:0|max:255|',
             'email' => 'required|email|unique:hospitals',
             'hospitalLink' => 'required|',
-            'phoneNo' => 'required|min:9|max:11|regex:/^\(?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
+            'phoneNo' => 'required|size:9|min:9|max:11|regex:/^\(?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
             'address' => 'required|min:5|max:255|',
             'zipCode' => 'required|min:0|max:5|',
             'stateID' => 'required',
@@ -93,6 +93,17 @@ class AdminViewHospitalsController extends Controller
     {
         $Hospitals = Hospitals::find($id);
 
+        $request->validate([
+            'hospitalName' => 'required|min:0|max:255|',
+            'email' => 'required|email|',
+            'hospitalLink' => 'required|',
+            'phoneNo' => 'required|size:9|min:9|max:11|regex:/^\(?([0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/|',
+            'address' => 'required|min:5|max:255|',
+            'zipCode' => 'required|min:0|max:5|',
+            'stateID' => 'required',
+        ]);
+
+        $Hospitals->hospitalName = $request->input('hospitalName');
         $Hospitals->email = $request->input('email');
         $Hospitals->phoneNo = $request->input('phoneNo');
         $Hospitals->address = $request->input('address');

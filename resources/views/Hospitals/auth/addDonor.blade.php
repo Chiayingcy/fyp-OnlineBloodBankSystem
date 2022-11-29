@@ -117,13 +117,13 @@
             <!-- Age -->
             <div class="form-group mt-4 mx-2">
                 <label for="age" :value="__('age')">Age:</label>
-                <input type="number" class="form-control" id="age" name="age" min="18" max="65" :value="old('ic')" required>
+                <input type="number" class="form-control" id="age" name="age" min="18" max="65" :value="old('age')" required>
             </div>
 
             <!-- Email Address -->
             <div class="form-group mt-4 mx-2">
                 <label for="email" :value="__('age')">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" :value="old('ic')" required>
+                <input type="email" class="form-control" id="email" name="email" :value="old('email')" required>
             </div>
 
             <!-- Blood Type -->

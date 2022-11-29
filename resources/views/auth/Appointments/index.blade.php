@@ -110,7 +110,22 @@
                                             Fail <br>{{ $appointment->reason }}
                                         @endif
                                     </td>
+
                                     <td colspan="3" class="align-center text-dark">
+
+                                    @php
+
+                                        $today = date("Y-m-d");
+
+                                    @endphp
+
+                                    @if($today > $appointment->appointmentDate && $appointment->appointmentStatus == 0)
+                                        <button class='btn btn-danger'>Appointment Expired</button>
+
+                                    @elseif($appointment->appointmentStatus == 1)
+                                        <button class='btn btn-success'>Appointment Success</button>
+
+                                    @else
                                         <button type='button align-center' class='btn btn-primary'><a
                                                 href="{{ route('appointment.edit', $appointment->id) }}">Edit</a></button>
 
@@ -118,7 +133,7 @@
                                             class='btn btn-danger'><a
                                                 href="{{ route('appointment.delete', $appointment->id) }}">Delete</a></button>
 
-                                        
+                                    @endif    
                                     </td>
                                 </tr>
                             @endforeach
@@ -178,7 +193,7 @@
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label for="appointmentTime"
-                                                        class="block text-sm font-medium text-gray-700"> selcet Hospital
+                                                        class="block text-sm font-medium text-gray-700"> Selcet Hospital
                                                     </label>
 
                                                     <div class="mt-1">

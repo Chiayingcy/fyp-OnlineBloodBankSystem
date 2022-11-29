@@ -147,9 +147,18 @@
                                 </td>
 
                                 <td colspan="3" class="align-center text-dark">
-                                    <a href="{{ route('Admin.bloodRequest.edit', $bloodRequest->id) }}"
-                                        class="btn btn-primary">
-                                        Approve / Reject</a></button>
+                                    @if ($bloodRequest->bloodRequestStatus == 0)
+                                        <a href="{{ route('Admin.bloodRequest.edit', $bloodRequest->id) }}"
+                                            class="btn btn-primary">
+                                            Approve / Reject</a></button>
+
+                                    @elseif($bloodRequest->bloodRequestStatus == 1)
+                                        <button class="btn btn-success">Success</button>
+
+                                    @else
+                                        <button class="btn btn-danger">Fail</button>
+
+                                    @endif
                                 </td>
 
                             </tr>

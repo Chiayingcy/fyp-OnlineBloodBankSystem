@@ -37,7 +37,7 @@ class RegisteredAdminController extends Controller
         
         $request->validate([
             'adminName' => 'required|min:0|max:255|',
-            'adminID' => 'required|min:0|max:12|unique:admin',
+            'adminID' => 'required|size:5|min:0|max:12|unique:admin',
             'email' => 'required|email|unique:hospitals',
             //'role' => 'required|min:1|max:1|',
             'password' => ['required', 'confirmed', 

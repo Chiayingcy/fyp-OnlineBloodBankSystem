@@ -94,6 +94,7 @@
         <div class="row align-items-center">
             <div class="py-12 w-100">
 
+            <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
                 <br />
 
                 <!-- Success Message -->
@@ -138,13 +139,14 @@
                     <div class="form-group mt-4 mx-2">
                         <label for="appointmentStatus" :value="__('appointmentStatus')">Status:</label>
                         <select id="appointmentStatus" class="form-control" name="appointmentStatus" required>
-                            <option value="0" {{ $appointment->appointmentStatus == 0 ? 'selected' : '' }}>
-                                Pending
-                            </option>
+                            <option value="">Select Appointment Status</option>
+
                             <option value="1" {{ $appointment->appointmentStatus == 1 ? 'selected' : '' }}>
                                 Success
                             </option>
-                            <option value="2" {{ $appointment->appointmentStatus == 2 ? 'selected' : '' }}>Fail
+
+                            <option value="2" {{ $appointment->appointmentStatus == 2 ? 'selected' : '' }}>
+                                Fail
                             </option>
                         </select>
                     </div>

@@ -95,7 +95,7 @@
             <!-- Name -->
             <div class="form-group mt-4 mx-2">
                 <label for="name" :value="__('Name')">Hospital Name:</label>
-                <input type="text" class="form-control" id="name" name="name" value="{{ $Hospitals->hospitalName }}"  autofocus readonly>
+                <input type="text" class="form-control" id="hospitalName" name="hospitalName" value="{{ $Hospitals->hospitalName }}"  autofocus>
             </div>
 
             <!-- Email Address -->

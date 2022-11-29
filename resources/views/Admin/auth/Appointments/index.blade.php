@@ -133,10 +133,20 @@
                                 </td>
 
                                 <td colspan="3" class="align-center text-dark">
+                                @if ($appo->appointmentStatus == 0)
                                     <a href="{{ route('Admin.AppointmentsDonorDetail', $appo->id) }}"
                                         class="btn btn-primary">
                                         Approve / Reject</a>
                                     </button>
+
+                                @elseif($appo->appointmentStatus == 1)
+                                    <button class="btn btn-success">Success</button>
+
+                                @else
+                                    <button class="btn btn-danger">Fail</button>
+
+                                @endif
+
                                 </td>
 
                             </tr>

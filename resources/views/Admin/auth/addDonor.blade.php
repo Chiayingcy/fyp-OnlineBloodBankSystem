@@ -3,8 +3,8 @@
 <style>
     .fa-eye{
   position: absolute;
-  margin-top: 2.3%;
-  margin-left: 75%;
+  margin-top: 2.8%;
+  margin-left: 70%;
   cursor: pointer;
   color: lightgray;
 }
@@ -80,6 +80,7 @@
         <div class="py-12 w-100">
 
         <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
+        
             <!--Search function -->
             <div class="my-2 my-lg-0 float-right">
             <form action="{{ route('Admin.searchDonorList') }}" method="GET" role="search">
@@ -116,7 +117,7 @@
             <!-- Age -->
             <div class="form-group mt-4 mx-2">
                 <label for="age" :value="__('age')">Age:</label>
-                <input type="number" class="form-control" id="age" name="age" min="18" max="65" :value="old('ic')" required>
+                <input type="number" class="form-control" id="age" name="age" min="18" max="65" :value="old('age')" required>
             </div>
 
             <!-- Email Address -->
@@ -264,3 +265,5 @@
         password_confirmationField.setAttribute("type", type);
     })
 </script>
+
+

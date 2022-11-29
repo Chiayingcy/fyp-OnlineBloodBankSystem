@@ -126,6 +126,13 @@ class AppointmentController extends Controller
     {
         $user = auth()->user()->id;
 
+        $min_date =Carbon::now()->addDays(2)->format('Y-m-d');
+
+        $openingTime = Carbon::createFromTime(8,0,0)->format('H:i:s');
+
+        $closingTime = Carbon::createFromTime(20,0,0)->format('H:i:s');
+
+
         $Appointment_new = Appointment::where('userID', $user)->get();
 
         foreach ($Appointment_new as $value) 
@@ -134,10 +141,10 @@ class AppointmentController extends Controller
             $fromDate = Carbon::parse($request->appointmentDate);
             $months = $toDate->diffInMonths($fromDate);
 
-            /*if ($months <= 3 && !Appointment::where('userID', $user)->where('appointmentDate', $request->appointmentDate)->exists()) 
+            if ($months < 3 && !Appointment::where('userID', $user)->where('appointmentDate', $request->appointmentDate)->exists()) 
             {
                 return redirect()->back()->with('message', __('Blood donation is only allowed again after 3 months...'));
-            }*/
+            }
         }
 
         $updateAppointment = Appointment::find($id);
@@ -146,7 +153,7 @@ class AppointmentController extends Controller
         $updateAppointment->hospitalId = $request->hospitalId;
         $updateAppointment->save();
 
-        return redirect()->route('appointment.index')->with('message', __('Appointment Updated Successfully.'));
+        return redirect()->route('appointment.index', compact('min_date', 'openingTime', 'closingTime'))->with('message', __('Appointment Updated Successfully.'));
     }
 
     /**

@@ -88,8 +88,10 @@
                                     <tr>
                                         <td colspan="3" class="align-center text-dark">
                                             {{ $donetList->hospital->hospitalName }}</td>
+
                                         <td colspan="3" class="align-center text-dark">
                                             {{ $donetList->appointmentDate }}</td>
+
                                         <td colspan="3" class="align-center text-dark">
                                             {{ $donetList->appointmentTime }}</td>
                                             
@@ -104,6 +106,7 @@
                                             Fail <br>{{ $appointment->reason }}
                                         @endif
                                     </td>
+                                    
                                     <td colspan="3" class="align-center text-dark">
                                             {{ $donetList->created_at }}</td>
                                     

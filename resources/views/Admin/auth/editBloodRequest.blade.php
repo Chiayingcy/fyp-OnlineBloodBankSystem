@@ -83,6 +83,7 @@
         <div class="row align-items-center">
             <div class="py-12 w-100">
 
+            <a href="{{ url()->previous() }}" class="btn btn-secondary ">Back</a>
                 <br />
 
                 <!-- Success Message -->
@@ -120,9 +121,8 @@
                     <div class="form-group mt-4 mx-2">
                         <label for="bloodRequestStatus" :value="__('age')">Status:</label>
                         <select id="bloodRequestStatus" class="form-control" name="bloodRequestStatus" required>
-                            <option value="0" {{ $bloodRequest->bloodRequestStatus == 0 ? 'selected' : '' }}>
-                                Pending
-                            </option>
+                            <option value=""> Select Blood Request Status</option>
+                            
                             <option value="1" {{ $bloodRequest->bloodRequestStatus == 1 ? 'selected' : '' }}>
                                 Success
                             </option>

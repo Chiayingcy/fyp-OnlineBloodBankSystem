@@ -133,16 +133,21 @@
                             <span class="badge badge-warning">Status is Pending</span>
 
                         @elseif($bloodRequest->bloodRequestStatus ==1)
-                        <span class="badge badge-success">Status is Approved</span>
+                            <span class="badge badge-success">Status is Approved</span>
 
                         @else
-                            {{ $bloodRequest->reason }}
+                        <span class="badge badge-danger">{{ $bloodRequest->reason }}</span>
                         @endif
 
                     </td>
+
                     <td colspan="3" class="align-center text-dark">
                         @if ($bloodRequest->bloodRequestStatus == 1)
-                            <span class="badge badge-success">Success</span>
+                            <button class="btn btn-success">Success</button>
+
+                        @elseif ($bloodRequest->bloodRequestStatus == 1)
+                            <button class="btn btn-danger">Fail</button>
+
                         @else
                             <button type='button align-center' class='btn btn-primary'><a href="{{route('Hospitals.bloodRequest.edit',$bloodRequest->id)}}">Edit</a></button>
                             <br/><br/>
